@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FurnDecor | Store Locator</title>
+    <link rel="stylesheet" href="/static/css/pages.css">
+</head>
+<body>
+
+<div class="store-locator-container">
+
+    <h1 class="page-title">Our Stores</h1>
+    <p class="page-subtitle">
+        Visit your nearest FurnDecor store to experience comfort, quality and design.
+    </p>
+
+    {% for city, city_stores in stores.items %}
+    <div class="city-block">
+        <h2 class="city-name">{{ city }}</h2>
+
+        <div class="store-grid">
+            {% for store in city_stores %}
+            <div class="store-card">
+                <h3>{{ store.name }}</h3>
+                <p><strong>Address:</strong><br>{{ store.address }}</p>
+                <p><strong>Phone:</strong> {{ store.phone }}</p>
+                <p><strong>Timings:</strong> {{ store.timing }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+</body>
+</html>

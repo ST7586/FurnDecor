@@ -1,0 +1,69 @@
+{% extends 'pages/layout.html' %}
+
+{% block content %}
+
+<!-- BANNER -->
+<div class="about-banner">
+    <img src="/static/images/contact-banner.jpg" alt="Contact Us">
+</div>
+
+<div class="about-content">
+    <h1>Contact Us</h1>
+    <p>
+        In case of any queries or information, just reach out to us.
+        We are happy to hear from you.
+    </p>
+</div>
+
+<!-- OFFICE + CONTACT INFO -->
+<div class="contact-info">
+
+    <div>
+        <h3>Registered and Corporate Office</h3>
+        <p><strong>FurnDecor Home Retail Limited</strong></p>
+        <p>
+            2nd Floor, Knowledge House, Shyam Nagar,<br>
+            Off Jogeshwari-Vikhroli Link Road,<br>
+            Near Talav, Jogeshwari-East,<br>
+            Mumbai-400060, Maharashtra, India
+        </p>
+        <p><strong>CIN:</strong> L52100MH2011PLC212866</p>
+    </div>
+
+    <div>
+        <h3>Connect with us</h3>
+        <p><strong>Phone:</strong> +91-22-6882-4900</p>
+    </div>
+
+</div>
+
+<!-- FORM -->
+<div class="contact-form">
+
+    <h3>Get in touch</h3>
+
+<form method="POST">
+    {% csrf_token %}
+        <div class="form-row">
+            <div>
+                <label>Name</label>
+                <input type="text" name="name" required>
+            </div>
+
+            <div>
+                <label>Phone Number</label>
+                <input type="text" name="phone" required>
+            </div>
+        </div>
+
+        <div>
+            <label>Query</label>
+            <textarea name="query" rows="5" required></textarea>
+        </div>
+
+        <button type="submit">SUBMIT</button>
+</form>
+
+</div>
+
+{% endblock %}

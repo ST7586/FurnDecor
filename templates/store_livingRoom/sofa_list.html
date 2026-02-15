@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sofas | Furndecor</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbars">
+    <div class="logo">
+        <a href="/">FurnDecor</a>
+    </div>
+
+    <div class="search-box">
+     <form method="get" action="{% url 'search' %}">
+        <input type="text" name="q" placeholder="What are you looking for?">
+         <button type="submit" class="search-icon">🔍︎</button>
+     </form>
+    </div>
+
+    <div class="nav-icons">
+        <a href="{% url 'login' %}">
+             <i class="user-icon"></i>
+<!-- PROFILE ICON -->
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+     xmlns="http://www.w3.org/2000/svg">
+  <circle cx="12" cy="8" r="4" stroke="black" stroke-width="1.5"/>
+  <path d="M4 20c0-4 16-4 16 0"
+        stroke="black" stroke-width="1.5"
+        stroke-linecap="round"/>
+</svg>
+</a>
+    <a href="javascript:void(0)" id="wishlistToggle">
+   ♡ <span class="count">{{ wishlist_count }}</span>
+</a>
+
+<a href="javascript:void(0)" onclick="openCart()">
+    🛒 <span class="count" id="cart-count">0</span>
+</a>
+
+{% include "store_livingRoom/cart.html" %}
+
+</div>
+</div> 
+
+<!--SLIDE PANEL -->
+<div class="wishlist-panel" id="wishlistPanel">
+
+    <div class="wishlist-header">
+        <button id="closeWishlist">←</button>
+        <h3>My Wishlist</h3>
+    </div>
+    {% if wishlist_items %}
+        {% for item in wishlist_items %}
+            <div class="wishlist-item" id="wishlist-item-{{ item.product.id }}">>
+
+                <img src="{{ item.product.variants.first.image.url }}" alt="">
+
+                <div class="wishlist-info">
+                    <p class="wishlist-title">
+                        {{ item.product.name }}
+                    </p>
+
+                    <span class="wishlist-seater">
+                        {{ item.product.variants.first.seater }}
+                    </span>
+
+                    <p class="wishlist-price">
+                        ₹{{ item.product.variants.first.price }}
+                    </p>
+                    
+                    <div class="qty-box">
+    <button type="button" onclick="decreaseQty(this)">-</button>
+    <span class="qtyValue">1</span>
+    <button type="button" onclick="increaseQty(this)">+</button>
+        
+               <button 
+                type="button" 
+                class="cart-btn" 
+                onclick="addToCart({{ selected_variant.id }})">
+                Add To Cart
+               </button>
+
+                    </div>
+                </div>
+
+        <button 
+          class="remove-wishlist-btn"
+          onclick="removeFromWishlist({{ item.product.id }})">
+        🗑
+        </button>
+</div>
+{% endfor %}
+    {% else %}
+        <p>No items in wishlist</p>
+    {% endif %} 
+</div>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="section" style="padding-bottom:20px;">
+    <h2 class="section-title">Sofas</h2>
+</div>
+
+
+<!-- SOFA LIST PAGE -->
+<div class="section product-list-page">
+    <div class="product-grid">
+
+        <!-- CARD 1 -->
+    <a href="{% url 'sofa_detail' slug='genova' %}"  class="product-link">    
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">75% OFF</span>
+                <img src="{% static 'images/sofa1.jpg' %}">
+            </div>
+            <h4>Genova Leatherette Sofa In Tan Color</h4>
+            <div class="price-row">
+                <span class="new-price">₹24,900</span>
+                <span class="old-price">₹103,000</span>
+            </div>
+        </div>
+    </a> 
+
+       <!-- CARD 2 -->
+       <a href="{% url 'sofa_detail' slug='riga' %}"  class="product-link">
+    <div class="product-link">  
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">73% OFF</span>
+                <img src="{% static 'images/sofa5.jpg' %}">
+            </div>
+            <h4>Riga Fabric Sofa</h4>
+            <div class="price-row">
+                <span class="new-price">₹19,900</span>
+                <span class="old-price">₹75,000</span>
+            </div>
+        </div>
+    </div>
+
+        <!-- CARD 3 -->
+        <a href="{% url 'sofa_detail' slug='garcia' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">57% OFF</span>
+                <img src="{% static 'images/sofa3.jpg' %}">
+            </div>
+            <h4>Garcia Fabric Sofa</h4>
+            <div class="price-row">
+                <span class="new-price">₹24,400</span>
+                <span class="old-price">₹56,900</span>
+            </div>
+        </div>
+
+        <!-- CARD 4 -->
+         <a href="{% url 'sofa_detail' slug='Manchester' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">78% OFF</span>
+                <img src="{% static 'images/sofa4.jpg' %}">
+            </div>
+            <h4>Manchester Fabric Sofa in Grey Colour</h4>
+            <div class="price-row">
+                <span class="new-price">₹12,900</span>
+                <span class="old-price">₹61,000</span>
+            </div>
+        </div>
+
+         <!-- CARD 5 -->
+          <a href="{% url 'sofa_detail' slug='perth' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">59% OFF</span>
+                <img src="{% static 'images/sofa2.jpg' %}">
+            </div>
+            <h4>Perth Fabric Sofa In Beige Colour</h4>
+            <div class="price-row">
+                <span class="new-price">₹57,000</span>
+                <span class="old-price">₹1,42,000</span>
+            </div>
+        </div>
+
+        <!-- CARD 6-->
+         <a href="{% url 'sofa_detail' slug='Malta' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">75% OFF</span>
+                <img src="{% static 'images/sofa6.jpg' %}">
+            </div>
+            <h4>Malta Fabric Sofa</h4>
+            <div class="price-row">
+                <span class="new-price">₹24,900</span>
+                <span class="old-price">₹1,02,000</span>
+            </div>
+        </div>
+
+        <!-- CARD 7 -->
+        <a href="{% url 'sofa_detail' slug='Miami' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">82% OFF</span>
+                <img src="{% static 'images/sofa7.jpg' %}">
+            </div>
+            <h4>Miami 1 seater Chair in Grey Colour</h4>
+            <div class="price-row">
+                <span class="new-price">₹24,900</span>
+                <span class="old-price">₹1,42,000</span>
+            </div>
+        </div>
+
+        <!-- CARD 8-->
+        <a href="{% url 'sofa_detail' slug='Asher' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">70% OFF</span>
+                <img src="{% static 'images/sofa8.jpg' %}">
+            </div>
+            <h4>Asher Fabric Sofa in Grey Colour</h4>
+            <div class="price-row">
+                <span class="new-price">₹29,900</span>
+                <span class="old-price">₹99,900</span>
+            </div>
+        </div>
+
+        <!-- CARD 9 -->
+                <a href="{% url 'sofa_detail' slug='siam' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">72% OFF</span>
+                <img src="{% static 'images/sofa9.jpg' %}">
+            </div>
+            <h4>Siam Solidwood Single Seater Sofa</h4>
+            <div class="price-row">
+                <span class="new-price">₹29,900</span>
+                <span class="old-price">₹1,44,900</span>
+            </div>
+        </div>
+
+        <!-- CARD 10-->
+        <a href="{% url 'sofa_detail' slug='catalina' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">61% OFF</span>
+                <img src="{% static 'images/sofa10.jpg' %}">
+            </div>
+            <h4>Catalina Velvet Sofa in Teal Colour</h4>
+            <div class="price-row">
+                <span class="new-price">₹34,990</span>
+                <span class="old-price">₹90,900</span>
+            </div>
+        </div>
+
+        <!-- CARD 11 -->
+        <a href="{% url 'sofa_detail' slug='claire' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">66% OFF</span>
+                <img src="{% static 'images/sofa11.jpg' %}">
+            </div>
+            <h4>Claire Velvet Two Seater Sofa in Beige Colour</h4>
+            <div class="price-row">
+                <span class="new-price">₹27,900</span>
+                <span class="old-price">₹83,900</span>
+            </div>
+        </div>
+        
+        <!-- CARD 12-->
+        <a href="{% url 'sofa_detail' slug='soren' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">75% OFF</span>
+                <img src="{% static 'images/sofa12.jpg' %}">
+            </div>
+            <h4>Soren Half Leather Sofa in Mushroom Colour</h4>
+            <div class="price-row">
+                <span class="new-price">₹53,000</span>
+                <span class="old-price">₹1,43,000</span>
+            </div>
+        </div>
+
+        <!-- CARD 13 -->
+         <a href="{% url 'sofa_detail' slug='elise' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">72% OFF</span>
+                <img src="{% static 'images/sofa13.jpg' %}">
+            </div>
+            <h4>Elise Velvet Fabric Sofa</h4>
+            <div class="price-row">
+                <span class="new-price">₹79,900</span>
+                <span class="old-price">₹2,90,900</span>
+            </div>
+        </div>
+
+        <!-- CARD 14-->
+        <a href="{% url 'sofa_detail' slug='Alexa' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">70% OFF</span>
+                <img src="{% static 'images/sofa14.jpg' %}">
+            </div>
+            <h4>Alexa Half Leather Sofa in Light Grey Colour</h4>
+            <div class="price-row">
+                <span class="new-price">₹29,900</span>
+                <span class="old-price">₹90,900</span>
+            </div>
+        </div>
+
+        <!-- CARD 15-->
+        <a href="{% url 'sofa_detail' slug='Grace' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">72% OFF</span>
+                <img src="{% static 'images/sofa15.jpg' %}">
+            </div>
+            <h4>Grace Fabric Sofa</h4>
+            <div class="price-row">
+                <span class="new-price">₹29,900</span>
+                <span class="old-price">₹1,44,900</span>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<!-- FOOTER -->
+{% include "partials/footer.html" %}
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ product.name }} | Furndecor</title>
+    {% load static %}
+    {% load humanize %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<div class="action-btns">
+    <form method="post" action="{% url 'buy_now' variant.id %}">
+    {% csrf_token %}
+       <button type="submit" class="buy-btn">
+        Buy it Now
+       </button>
+     </form>
+</div>
+</body>
+</html>
+
+

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bed Room | Furndecor</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbars">
+    <div class="logo">
+        <a href="/">FurnDecor</a>
+    </div>
+
+    <div class="search-box">
+     <form method="get" action="{% url 'search' %}">
+        <input type="text" placeholder="What are you looking for?">
+         <button type="submit" class="search-icon">🔍︎</button>
+     </form>
+    </div>
+
+    <div class="nav-icons">
+        <a href="#"><!-- PROFILE ICON -->
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+     xmlns="http://www.w3.org/2000/svg">
+  <circle cx="12" cy="8" r="4" stroke="black" stroke-width="1.5"/>
+  <path d="M4 20c0-4 16-4 16 0"
+        stroke="black" stroke-width="1.5"
+        stroke-linecap="round"/>
+</svg>
+</a>
+        <a href="javascript:void(0)" onclick="openWishlist()">
+             ♡ <span class="count">{{ wishlist_count|default:0}}</span>
+        </a>
+        <a href="#">🛒 <span class="count">0</span></a>
+    </div>
+</div>
+
+<!-- WISHLIST SLIDE PANEL -->
+       <div id="wishlistPanel" class="wishlist-panel">
+           <h3>My Wishlist</h3>
+           {% if wishlist_count == 0 %}
+           <p>No items in wishlist</p>
+           {% endif %}
+        </div>
+
+
+<!-- PAGE HEADER -->
+<div class="hero" style="padding:80px 20px;">
+    <h1>Living Room Furniture</h1>
+    <p>Comfort, style & functionality for your living space</p>
+</div>
+
+<!-- CATEGORY ITEMS -->
+<!-- CATEGORY ITEMS SECTION -->
+<div class="section">
+    <h2 class="section-title">Explore Categories</h2>
+
+    <div class="space-grid living-grid">
+
+        <a href="/living-room/sofas/" class="space-card">
+            <img src="{% static 'images/sofa.jpg' %}">
+            <div class="space-label">Sofas</div>
+        </a>
+
+        <a href="/living-room/curtains/" class="space-card">
+            <img src="{% static 'images/curtains.jpg' %}">
+            <div class="space-label">Curtains</div>
+        </a>
+
+        <a href="/living-room/centertable/" class="space-card">
+            <img src="{% static 'images/center_table.jpg' %}">
+            <div class="space-label">Center Tables</div>
+        </a>
+
+        <div class="space-card">
+            <img src="{% static 'images/carpet.jpg' %}">
+            <div class="space-label">Carpets</div>
+        </div>
+
+        <div class="space-card">
+            <img src="{% static 'images/tv_units.jpg' %}">
+            <div class="space-label">TV & Media Units</div>
+        </div>
+
+        <div class="space-card">
+            <img src="{% static 'images/chair.jpg' %}">
+            <div class="space-label">Chairs</div>
+        </div>
+
+        <div class="space-card">
+            <img src="{% static 'images/side_table.jpg' %}">
+            <div class="space-label">Side Tables</div>
+        </div>
+
+        <div class="space-card">
+            <img src="{% static 'images/cabinets and sideboards.jpg' %}">
+            <div class="space-label">Cabinets & Sideboards</div>
+        </div>
+
+        <div class="space-card">
+            <img src="{% static 'images/wall.jpg' %}">
+            <div class="space-label">Wall Art & Shelves</div>
+        </div>
+
+        <div class="space-card">
+            <img src="{% static 'images/lights.jpg' %}">
+            <div class="space-label">Lighting</div>
+        </div>
+
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <p>© 2026 Furndecor. All Rights Reserved.</p>
+</div>
+
+<script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

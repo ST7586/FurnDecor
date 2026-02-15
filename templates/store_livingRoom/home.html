@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FurnDecor | Furniture & Home Decor</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="footer-logo"> <img src="{% static 'images/logo.jpg' %}" alt="FurnDecor"></div>
+    <div class="menu">
+        <a href="#">Home</a>
+        <a href="#">Categories</a>
+        <a href="/about/">About Us</a>
+    </div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>Design Your Home, Your Way</h1>
+    <p>Furniture curated by space, style & comfort</p>
+</div>
+
+<!-- MAIN CATEGORY NAVIGATION -->
+<div class="section">
+    <h2 class="section-title">Shop By Room</h2>
+
+    <div class="space-grid">
+
+        <a href="/living-room/" class="space-card">
+            <img src="{% static 'images/living_room.jpg' %}">
+            <div class="space-label">Living Room</div>
+        </a>
+
+        <a href="bedroom.html" class="space-card">
+            <img src="{% static 'images/bed.jpg' %}">
+            <div class="space-label">Bed Room</div>
+        </a>
+
+        <a href="dining.html" class="space-card">
+            <img src="{% static 'images/dining.jpg' %}">
+            <div class="space-label">Dining Room</div>
+        </a>
+
+        <a href="study.html" class="space-card">
+            <img src="{% static 'images/study.jpg' %}">
+            <div class="space-label">Study Room</div>
+        </a>
+
+        <a href="decor.html" class="space-card">
+            <img src="{% static 'images/decor.jpg' %}">
+            <div class="space-label">Home Decor</div>
+        </a>
+
+<!-- GUEST ROOM -->
+        <a href="drawing_room.html" class="space-card">
+             <img src="{% static 'images/drawing.jpg' %}">
+             <div class="space-label">Drawing Room</div>
+        </a>
+
+<!-- LUXURY FURNITURE -->
+        <a href="luxury.html" class="space-card">
+             <img src="{% static 'images/luxury.jpg' %}">
+             <div class="space-label">Luxury Furniture</div>
+        </a>
+
+<!-- PUREWOOD FURNITURE -->
+         <a href="purewood.html" class="space-card">
+             <img src="{% static 'images/pure_wood.jpg' %}">
+             <div class="space-label">PureWood Furniture</div>
+         </a>
+
+    </div>
+</div>
+
+<!-- WHY -->
+<div class="why">
+    <h2>Why Furndecor?</h2>
+    <p>✔ Space-based furniture browsing</p>
+    <p>✔ Quality materials & design</p>
+    <p>✔ Scalable e-commerce architecture</p>
+</div>
+
+<!-- FOOTER -->
+
+{% include "partials/footer.html" %}
+</body>
+</html>

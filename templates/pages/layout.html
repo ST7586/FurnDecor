@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FurnDecor</title>
+    <link rel="stylesheet" href="/static/css/pages.css">
+</head>
+<body>
+
+<div class="page-wrapper">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
+        <h2 class="brand">FurnDecor</h2>
+
+<ul>
+  <li><a href="{% url 'who_we_are' %}">Who we are</a></li>
+  <li><a href="{% url 'what_we_do' %}">What we do</a></li>
+  <li><a href="{% url 'contact' %}">Contact Us</a></li>
+</ul>
+
+
+        <p class="sidebar-footer">
+            © 2026 FurnDecor Pvt Ltd.
+        </p>
+    </aside>
+
+    <!-- RIGHT CONTENT -->
+    <main class="content">
+        {% block content %}{% endblock %}
+    </main>
+
+</div>
+
+</body>
+</html>

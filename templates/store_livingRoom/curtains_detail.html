@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ product.name }} | Furndecor</title>
+    {% load static %}
+    {% load humanize %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbars">
+    <div class="logo">
+        <a href="/">FurnDecor</a>
+    </div>
+
+    <div class="search-box">
+     <form method="get" action="{% url 'search' %}">
+        <input type="text" name="q" placeholder="What are you looking for?">
+         <button type="submit" class="search-icon">🔍︎</button>
+     </form>
+    </div>
+
+    <div class="nav-icons">
+        <a href="{% url 'login' %}">
+             <i class="user-icon"></i>
+<!-- PROFILE ICON -->
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+     xmlns="http://www.w3.org/2000/svg">
+  <circle cx="12" cy="8" r="4" stroke="black" stroke-width="1.5"/>
+  <path d="M4 20c0-4 16-4 16 0"
+        stroke="black" stroke-width="1.5"
+        stroke-linecap="round"/>
+</svg>
+</a>
+    <a href="javascript:void(0)" id="wishlistToggle">
+   ♡ <span class="count">{{ wishlist_count }}</span>
+</a>
+
+<a href="javascript:void(0)" onclick="openCart()">
+    🛒 <span class="count" id="cart-count">0</span>
+</a>
+
+{% include "store_livingRoom/cart.html" %}
+
+</div>
+</div> 
+
+<!--SLIDE PANEL -->
+<div class="wishlist-panel" id="wishlistPanel">
+
+    <div class="wishlist-header">
+        <button id="closeWishlist">←</button>
+        <h3>My Wishlist</h3>
+    </div>
+    {% if wishlist_items %}
+        {% for item in wishlist_items %}
+            <div class="wishlist-item" id="wishlist-item-{{ item.product.id }}">>
+
+                <img src="{{ item.product.first.image.url }}" alt="">
+
+                <div class="wishlist-info">
+                    <p class="wishlist-title">
+                        {{ item.product.name }}
+                    </p>
+
+
+                    <p class="wishlist-price">
+                        ₹{{ item.product.first.price }}
+                    </p>
+                    <div class="qty-box">
+    <button type="button" onclick="decreaseQty(this)">-</button>
+    <span class="qtyValue">1</span>
+    <button type="button" onclick="increaseQty(this)">+</button>
+
+              <button 
+                type="button" 
+                class="cart-btn" 
+                onclick="addToCart({{ selected.id }})">
+                Add To Cart
+               </button>
+
+                    </div>
+                </div>
+
+        <button 
+          class="remove-wishlist-btn"
+          onclick="removeFromWishlist({{ item.product.id }})">
+        🗑
+        </button>
+
+</div>
+{% endfor %}
+    {% else %}
+        <p>No items in wishlist</p>
+    {% endif %} 
+</div>
+</div>
+
+<div class="section product-detail-page">
+  <div class="product-detail-grid">
+<!-- LEFT IMAGE -->
+        <div class="detail-left">
+            <img src="{{selected.image.url  }}"
+            id="mainCurtainImage"
+            class="main-Curtain-img">
+        </div>
+
+        <!-- RIGHT DETAILS -->
+        <div class="detail-right">
+
+            
+
+            <h1 class="product-title">
+                {{ selected_variant.product.name }}
+            </h1>
+
+            <div class="price-block">
+                <span class="old-price">
+                    ₹{{ selected_variant.old_price|intcomma }}
+                </span>
+
+                <span class="new-price">
+                    ₹{{ selected_variant.price|intcomma }}
+                </span>
+
+
+                 {% if selected_variant.discount %}
+        <span class="discounts">-{{ selected_variant.discount }}%</span>
+    {% endif %}
+
+
+            </div>
+
+            <p class="tax-text">
+                Inclusive of all prices. Shipping calculated at checkout.
+            </p>
+<!--seater-->
+         <div class="seater-options">
+    {% for variant in variants %}
+    <button
+        class="seater-btn {% if variant.id == selected_variant.id %}active{% endif %}"
+        data-id="{{ variant.id }}"
+        data-price="{{ variant.price }}"
+        data-old="{{ variant.old_price }}"
+        data-discount="{{ variant.discount }}"
+        data-image="{{ variant.image.url }}"
+        onclick="changeVariant(this)">
+        {% if variant.seater %}
+    <b>{{ variant.seater|title }} Seater</b>
+{% endif %}
+
+    </button>
+    {% endfor %}
+</div>   
+
+
+            <!-- WISHLIST + QTY -->
+           <div class="wishlist-qty">
+    <button 
+        id="wishlistBtn"
+        class="{% if is_wishlisted %}wish-active{% endif %}"
+        onclick="toggleWishlist({{ product.id }})"
+    >
+        {% if is_wishlisted %}
+            ♥
+        {% else %}
+            ♡
+        {% endif %}
+    </button>
+</div>
+
+
+                <div class="qty-box">
+    <button type="button" onclick="decreaseQty(this)">-</button>
+    <span class="qtyValue">1</span>
+    <button type="button" onclick="increaseQty(this)">+</button>
+
+            </div>
+        
+
+
+            <!-- ACTION BUTTONS -->
+        <div class="action-btns">
+
+            {% include "partials/buy_button.html" with variant=selected_variant %}
+            
+                <button 
+                type="button" 
+                class="cart-btn" 
+                onclick="addToCart({{ selected_variant.id }})">
+                Add To Cart
+               </button>
+
+            </div>
+
+
+            <!-- ICON FEATURES -->
+            <div class="icon-features">
+                <div>
+                    <span>🛡</span>
+                    <p>1 year warranty</p>
+                </div>
+                <div>
+                    <span>🚚</span>
+                    <p>Free delivery</p>
+                </div>
+                <div>
+                    <span>📦</span>
+                    <p>Free installation</p>
+                </div>
+            </div>
+
+<!-- FEATURES -->
+<div class="acc-item">
+    <div class="acc-header" onclick="toggleAcc(this)">
+      Features <span>+</span>
+     </div>
+    <div class="acc-body">
+        {{ product.features|safe }}
+    </div>
+</div>
+
+
+<!-- DETAILS -->
+<div class="acc-item">
+    <div class="acc-header" onclick="toggleAcc(this)">
+        Details <span>+</span>
+     </div>
+    <div class="acc-body">
+        {{ product.details|safe }}
+    </div>
+</div>
+
+<!-- PRODUCT CARE -->
+<div class="acc-item">
+    <div class="acc-header" onclick="toggleAcc(this)">
+        Product Care  <span>+</span>
+     </div>
+    <div class="acc-body">
+        {{ product.product_care|safe }}
+    </div>
+</div>
+
+<!-- RETURN POLICY -->
+<div class="acc-item">
+    <div class="acc-header" onclick="toggleAcc(this)">
+        Return and cancellation policy <span>+</span>
+     </div>
+    <div class="acc-body">
+        {{ product.return_policy|safe }}
+    </div>
+</div>
+
+
+<script src="{% static 'js/script.js' %}"></script>
+
+</body>
+</html>

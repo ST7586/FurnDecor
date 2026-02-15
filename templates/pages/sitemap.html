@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>      
+    <title>FurnDecor | Sitemap</title>
+    <link rel="stylesheet" href="/static/css/pages.css">
+    {% load static %}
+</head>
+<body>
+<h2 class="footer-logo"><img src="{% static 'images/logo.jpg' %}" alt="FurnDecor"></h2>
+  
+<div class="sitemap-container">
+  <h1 class="sitemap-title"><u>Sitemap</u></h1>
+
+  <!-- Furniture -->
+
+  <div class="sitemap-grid">
+
+    <!-- Living Room -->
+    <div class="sitemap-col">
+      <h3>Living Room</h3>
+      <ul>
+        <li><a href="{% url 'sofa_list' %}">Sofas</a></li>
+        <li><a href="{% url 'curtains_list' %}">Curtains</a></li>
+        <li><a href="{% url 'centertable_list' %}">Center Tables</a></li>
+        <li><a href="{% url 'carpets_list' %}">Carpets</a></li>
+        <li><a href="{% url 'tv_media_units_list' %}">TV & Media Units</a></li>
+        <li><a href="{% url 'chairs_list' %}">Chairs</a></li>
+        <li><a href="{% url 'side_tables_list' %}">Side Tables</a></li>
+        <li><a href="{% url 'cabinets_sideboards_list' %}">Cabinets & Sideboards</a></li>
+        <li><a href="{% url 'wall_art_shelves_list' %}">Wall Art & Shelves</a></li>
+        <li><a href="{% url 'lighting_list' %}">Lighting</a></li>
+      </ul>
+    </div>
+
+    <!-- Dining -->
+    <div class="sitemap-col">
+      <h3>Dining Room</h3>
+      <ul>
+        <li><a href="/products/dining-sets/">Dining Sets</a></li>
+        <li><a href="/products/dining-tables/">Dining Tables</a></li>
+        <li><a href="/products/dining-chairs/">Dining Chairs</a></li>
+        <li><a href="/products/dining-benches/">Dining Benches</a></li>
+        <li><a href="/products/sideboards/">Storage Sideboards</a></li>
+      </ul>
+    </div>
+
+    <!-- Bedroom -->
+    <div class="sitemap-col">
+      <h3>Bedroom</h3>
+      <ul>
+        <li><a href="/products/beds/">Beds</a></li>
+        <li><a href="/products/wardrobes/">Wardrobes</a></li>
+        <li><a href="/products/bedside-tables/">Bedside Tables</a></li>
+        <li><a href="/products/chest-of-drawers/">Chest of Drawers</a></li>
+        <li><a href="/products/dressing-tables/">Dressing Tables</a></li>
+      </ul>
+    </div>
+
+    <!-- Study Room -->
+    <div class="sitemap-col">
+      <h3>Study Room</h3>
+      <ul>
+        <li><a href="/products/kids-beds/">Beds</a></li>
+        <li><a href="/products/kids-storage/">Storage</a></li>
+        <li><a href="/products/study-tables/">Study Tables</a></li>
+        <li><a href="/products/shoe-racks/">Shoe Racks</a></li>
+      </ul>
+    </div>
+
+    <!-- Home Decor -->
+    <div class="sitemap-col">
+      <h3>HomeDecor</h3>
+      <ul>
+        <li><a href="/products/bar-cabinets/">Bar Cabinets</a></li>
+        <li><a href="/products/serving-trolleys/">Serving Trolleys</a></li>
+      </ul>
+    </div>
+
+    <!-- Luxury Furniture -->
+    <div class="sitemap-col">
+      <h3>Luxury Furniture</h3>
+      <ul>
+        <li><a href="/products/ottomans/">Ottomans & Poufs</a></li>
+        <li><a href="/products/stools/">Stools</a></li>
+        <li><a href="/products/wall-shelves/">Wall Shelves</a></li>
+      </ul>
+    </div>
+
+    <!--PureWood Furniture-->
+  <div class="sitemap-col">
+      <h3>PureWood Furniture</h3>
+      <ul>
+        <li><a href="/products/ottomans/">Ottomans & Poufs</a></li>
+        <li><a href="/products/stools/">Stools</a></li>
+        <li><a href="/products/wall-shelves/">Wall Shelves</a></li>
+      </ul>
+    </div>
+
+  <!-- Blogs -->
+  <div class="sitemap-col">
+      <h3>Blogs</h3>
+      <ul>
+        <li><a href="/blogs/">All Blogs</a></li>
+      </ul>
+  </div>
+
+  <!-- Pages -->
+  <div class="sitemap-col">
+      <h3>Pages</h3>
+        <ul>
+          <li><a href="/about/">About Us</a></li>
+          <li><a href="/contact/">Contact Us</a></li>
+        </ul>
+  </div>
+
+</div>
+</div>
+</body>
+</html>

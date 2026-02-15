@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sofas | Furndecor</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbars">
+    <div class="logo">
+        <a href="/">FurnDecor</a>
+    </div>
+
+    <div class="search-box">
+     <form method="get" action="{% url 'search' %}">
+        <input type="text" name="q" placeholder="What are you looking for?">
+         <button type="submit" class="search-icon">🔍︎</button>
+     </form>
+    </div>
+
+    <div class="nav-icons">
+        <a href="{% url 'login' %}">
+             <i class="user-icon"></i>
+<!-- PROFILE ICON -->
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+     xmlns="http://www.w3.org/2000/svg">
+  <circle cx="12" cy="8" r="4" stroke="black" stroke-width="1.5"/>
+  <path d="M4 20c0-4 16-4 16 0"
+        stroke="black" stroke-width="1.5"
+        stroke-linecap="round"/>
+</svg>
+</a>
+    <a href="javascript:void(0)" id="wishlistToggle">
+   ♡ <span class="count">{{ wishlist_count }}</span>
+</a>
+
+<a href="javascript:void(0)" onclick="openCart()">
+    🛒 <span class="count" id="cart-count">0</span>
+</a>
+
+{% include "store_livingRoom/cart.html" %}
+
+</div>
+</div> 
+
+<!--SLIDE PANEL -->
+<div class="wishlist-panel" id="wishlistPanel">
+
+    <div class="wishlist-header">
+        <button id="closeWishlist">←</button>
+        <h3>My Wishlist</h3>
+    </div>
+    {% if wishlist_items %}
+        {% for item in wishlist_items %}
+            <div class="wishlist-item" id="wishlist-item-{{ item.product.id }}">>
+
+                <img src="{{ item.product.variants.first.image.url }}" alt="">
+
+                <div class="wishlist-info">
+                    <p class="wishlist-title">
+                        {{ item.product.name }}
+                    </p>
+
+                    <span class="wishlist-seater">
+                        {{ item.product.variants.first.seater }}
+                    </span>
+
+                    <p class="wishlist-price">
+                        ₹{{ item.product.variants.first.price }}
+                    </p>
+                    
+                    <div class="qty-box">
+    <button type="button" onclick="decreaseQty(this)">-</button>
+    <span class="qtyValue">1</span>
+    <button type="button" onclick="increaseQty(this)">+</button>
+        
+               <button 
+                type="button" 
+                class="cart-btn" 
+                onclick="addToCart({{ selected_variant.id }})">
+                Add To Cart
+               </button>
+
+                    </div>
+                </div>
+
+        <button 
+          class="remove-wishlist-btn"
+          onclick="removeFromWishlist({{ item.product.id }})">
+        🗑
+        </button>
+</div>
+{% endfor %}
+    {% else %}
+        <p>No items in wishlist</p>
+    {% endif %} 
+</div>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="section" style="padding-bottom:20px;">
+    <h2 class="section-title">Chairs</h2>
+    <p>Comfortable Stylish Durable.</p>
+</div>
+
+
+<!-- SOFA LIST PAGE -->
+<div class="section product-list-page">
+    <div class="product-grid">
+
+        <!-- CARD 1 -->
+    <a href="{% url 'chairs_detail' slug='arica' %}"  class="product-link">    
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">53% OFF</span>
+                <img src="{% static 'images/chair1.jpg' %}">
+            </div>
+            <h4>Arica Velvet Fabric Arm Chair In Grey And Brown Color</h4>
+            <div class="price-row">
+                <span class="new-price">₹6,999</span>
+                <span class="old-price">₹14,999</span>
+            </div>
+        </div>
+    </a> 
+
+       <!-- CARD 2 -->
+    <a href="{% url 'chairs_detail' slug='Wood' %}"  class="product-link">
+        <div class="product-link">  
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">18% OFF</span>
+                <img src="{% static 'images/chair2.jpg' %}">
+            </div>
+            <h4>Stalley Sheesham Wood Arm Chair In Scratch Resistant Honey Oak Finish</h4>
+            <div class="price-row">
+                <span class="new-price">₹17,999</span>
+                <span class="old-price">₹21,999</span>
+            </div>
+        </div>
+    </div>
+
+        <!-- CARD 3 -->
+    <a href="{% url 'chairs_detail' slug='Calvary' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">26% OFF</span>
+                <img src="{% static 'images/chair3.jpg' %}">
+            </div>
+            <h4>Calvary Sheesham Wood Arm Chair In Scratch Resistant Provincial Teak Finish with Cane Mesh</h4>
+            <div class="price-row">
+                <span class="new-price">₹15,499</span>
+                <span class="old-price">₹20,999</span>
+            </div>
+        </div>
+
+        <!-- CARD 4 -->
+    <a href="{% url 'chairs_detail' slug='Folding' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">68% OFF</span>
+                <img src="{% static 'images/chair4.jpg' %}">
+            </div>
+            <h4>Siegen Sheesham Wood Folding Chair</h4>
+            <div class="price-row">
+                <span class="new-price">₹5,999</span>
+                <span class="old-price">₹18,999</span>
+            </div>
+        </div>
+
+         <!-- CARD 5 -->
+    <a href="{% url 'chairs_detail' slug='Honey' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">18% OFF</span>
+                <img src="{% static 'images/chair5.jpg' %}">
+            </div>
+            <h4>Stalley Sheesham Wood Arm Chair In Green & Scratch Resistant Honey Oak Finish</h4>
+            <div class="price-row">
+                <span class="new-price">₹17,999</span>
+                <span class="old-price">₹19,999</span>
+            </div>
+        </div>
+
+        <!-- CARD 6-->
+    <a href="{% url 'chairs_detail' slug='Malta' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">25% OFF</span>
+                <img src="{% static 'images/chair6.jpg' %}">
+            </div>
+            <h4>Clint Sheesham Wood Arm Chair</h4>
+            <div class="price-row">
+                <span class="new-price">₹8,999</span>
+                <span class="old-price">₹11,999</span>
+            </div>
+        </div>
+
+        <!-- CARD 7 -->
+    <a href="{% url 'chairs_detail' slug='Miami' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">21% OFF</span>
+                <img src="{% static 'images/chair7.jpg' %}">
+            </div>
+            <h4>Milton Sheesham Wood Arm Chair In Grey & Rustic</h4>
+            <div class="price-row">
+                <span class="new-price">₹13,499</span>
+                <span class="old-price">₹16,999</span>
+            </div>
+        </div>
+
+        <!-- CARD 8-->
+    <a href="{% url 'chairs_detail' slug='Asher' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">31% OFF</span>
+                <img src="{% static 'images/chair8.jpg' %}">
+            </div>
+            <h4>Elegant Sheesham Wood Arm Chair </h4>
+            <div class="price-row">
+                <span class="new-price">₹11,111</span>
+                <span class="old-price">₹15,999</span>
+            </div>
+        </div>
+
+        <!-- CARD 9 -->
+    <a href="{% url 'chairs_detail' slug='siam' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">27% OFF</span>
+                <img src="{% static 'images/chair9.jpg' %}">
+            </div>
+            <h4>Ishani Sheesham Wood Arm Chair In Provincial Teak Finish</h4>
+            <div class="price-row">
+                <span class="new-price">₹7,999</span>
+                <span class="old-price">₹10,999</span>
+            </div>
+        </div>
+
+        <!-- CARD 10-->
+    <a href="{% url 'chairs_detail' slug='catalina' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">18% OFF</span>
+                <img src="{% static 'images/chair10.jpg' %}">
+            </div>
+            <h4>Brotton Sheesham Wood Arm Chair </h4>
+            <div class="price-row">
+                <span class="new-price">₹17,999</span>
+                <span class="old-price">₹21,999</span>
+            </div>
+        </div>
+
+        <!-- CARD 11 -->
+    <a href="{% url 'chairs_detail' slug='claire' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">21% OFF</span>
+                <img src="{% static 'images/chair11.jpg' %}">
+            </div>
+            <h4>Amherst Sheesham Wood Arm Chair In Honey Oak Finish</h4>
+            <div class="price-row">
+                <span class="new-price">₹13,499</span>
+                <span class="old-price">₹16,999</span>
+            </div>
+        </div>
+        
+        <!-- CARD 12-->
+    <a href="{% url 'chairs_detail' slug='soren' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">29% OFF</span>
+                <img src="{% static 'images/chair12.jpg' %}">
+            </div>
+            <h4>Kharkov Sheesham Wood Arm Chair In Rustic Teak Finish</h4>
+            <div class="price-row">
+                <span class="new-price">₹9,999</span>
+                <span class="old-price">₹13,999</span>
+            </div>
+        </div>
+
+        <!-- CARD 13 -->
+    <a href="{% url 'chairs_detail' slug='elise' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">25% OFF</span>
+                <img src="{% static 'images/chair13.jpg' %}">
+            </div>
+            <h4>Stigen Sheesham Wood Arm Chair </h4>
+            <div class="price-row">
+                <span class="new-price">₹8,999</span>
+                <span class="old-price">₹11,999</span>
+            </div>
+        </div>
+
+        <!-- CARD 14-->
+    <a href="{% url 'chairs_detail' slug='Alexa' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">20% OFF</span>
+                <img src="{% static 'images/chair14.jpg' %}">
+            </div>
+            <h4>Carden Sheesham Wood Arm Chair </h4>
+            <div class="price-row">
+                <span class="new-price">₹11,999</span>
+                <span class="old-price">₹14,999</span>
+            </div>
+        </div>
+
+        <!-- CARD 15-->
+    <a href="{% url 'chairs_detail' slug='Grace' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">28% OFF</span>
+                <img src="{% static 'images/chair15.jpg' %}">
+            </div>
+            <h4>Rezzan Sheesham Wood Rocking Chair</h4>
+            <div class="price-row">
+                <span class="new-price">₹22,999</span>
+                <span class="old-price">₹31,999</span>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<!-- FOOTER -->
+{% include "partials/footer.html" %}
+
+</body>
+</html>

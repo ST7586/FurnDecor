@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Center Tables | Furndecor</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbars">
+    <div class="logo">
+        <a href="/">FurnDecor</a>
+    </div>
+
+    <div class="search-box">
+     <form method="get" action="{% url 'search' %}">
+        <input type="text" name="q" placeholder="What are you looking for?">
+         <button type="submit" class="search-icon">🔍︎</button>
+     </form>
+    </div>
+
+    <div class="nav-icons">
+        <a href="{% url 'login' %}">
+             <i class="user-icon"></i>
+<!-- PROFILE ICON -->
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+     xmlns="http://www.w3.org/2000/svg">
+  <circle cx="12" cy="8" r="4" stroke="black" stroke-width="1.5"/>
+  <path d="M4 20c0-4 16-4 16 0"
+        stroke="black" stroke-width="1.5"
+        stroke-linecap="round"/>
+</svg>
+</a>
+    <a href="javascript:void(0)" id="wishlistToggle">
+   ♡ <span class="count">{{ wishlist_count }}</span>
+</a>
+
+<a href="javascript:void(0)" onclick="openCart()">
+    🛒 <span class="count" id="cart-count">0</span>
+</a>
+
+{% include "store_livingRoom/cart.html" %}
+
+</div>
+</div> 
+
+<!--SLIDE PANEL -->
+<div class="wishlist-panel" id="wishlistPanel">
+
+    <div class="wishlist-header">
+        <button id="closeWishlist">←</button>
+        <h3>My Wishlist</h3>
+    </div>
+    {% if wishlist_items %}
+        {% for item in wishlist_items %}
+            <div class="wishlist-item" id="wishlist-item-{{ item.product.id }}">>
+
+                <img src="{{ item.product.variants.first.image.url }}" alt="">
+
+                <div class="wishlist-info">
+                    <p class="wishlist-title">
+                        {{ item.product.name }}
+                    </p>
+
+                    <span class="wishlist-seater">
+                        {{ item.product.variants.first.seater }}
+                    </span>
+
+                    <p class="wishlist-price">
+                        ₹{{ item.product.variants.first.price }}
+                    </p>
+                    
+                    <div class="qty-box">
+    <button type="button" onclick="decreaseQty(this)">-</button>
+    <span class="qtyValue">1</span>
+    <button type="button" onclick="increaseQty(this)">+</button>
+        
+               <button 
+                type="button" 
+                class="cart-btn" 
+                onclick="addToCart({{ selected_variant.id }})">
+                Add To Cart
+               </button>
+
+                    </div>
+                </div>
+
+        <button 
+          class="remove-wishlist-btn"
+          onclick="removeFromWishlist({{ item.product.id }})">
+        🗑
+        </button>
+</div>
+{% endfor %}
+    {% else %}
+        <p>No items in wishlist</p>
+    {% endif %} 
+</div>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="section" style="padding-bottom:20px;">
+    <h2>CENTER-TABLES</h2>
+</div>
+
+
+<!-- CENTER TABLE LIST PAGE -->
+<div class="section product-list-page">
+    <div class="product-grid">
+
+        <!-- CARD 1 -->
+    <a href="{% url 'center table_detail' slug='Noel' %}"  class="product-link">    
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">52% OFF</span>
+                <img src="{% static 'images/table1.jpg' %}">
+            </div>
+            <h4>Noel Coffee Table In Brown Maple Finish</h4>
+            <div class="price-row">
+                <span class="new-price">₹2,499</span>
+                <span class="old-price">₹5,199</span>
+            </div>
+        </div>
+    </a> 
+
+       <!-- CARD 2 -->
+       <a href="{% url 'center table_detail' slug='Iron' %}"  class="product-link">
+    <div class="product-link">  
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">53% OFF</span>
+                <img src="{% static 'images/table2.jpg' %}">
+            </div>
+            <h4>Iron Frame Handmade 20.5" x 20.5" Round Coffee Table</h4>
+            <div class="price-row">
+                <span class="new-price">₹2,799</span>
+                <span class="old-price">₹5,999</span>
+            </div>
+        </div>
+    </div>
+
+        <!-- CARD 3 -->
+        <a href="{% url 'center table_detail' slug='Home' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">58% OFF</span>
+                <img src="{% static 'images/table3.jpg' %}">
+            </div>
+            <h4>Home Furniture Wooden Center Coffee Table</h4>
+            <div class="price-row">
+                <span class="new-price">₹5,499</span>
+                <span class="old-price">₹12,999</span>
+            </div>
+        </div>
+
+        <!-- CARD 4 -->
+         <a href="{% url 'center table_detail' slug='Thomas' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">55% OFF</span>
+                <img src="{% static 'images/table4.jpg' %}">
+            </div>
+            <h4>Thomas Marble Center Table in Gold and White Colour</h4>
+            <div class="price-row">
+                <span class="new-price">₹34,900</span>
+                <span class="old-price">₹77,900</span>
+            </div>
+        </div>
+
+         <!-- CARD 5 -->
+          <a href="{% url 'center table_detail' slug='Gallo' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">31% OFF</span>
+                <img src="{% static 'images/table5.jpg' %}">
+            </div>
+            <h4>Gallo Faux Marble Top Coffee Table In Black Pvd Finish</h4>
+            <div class="price-row">
+                <span class="new-price">₹38,999</span>
+                <span class="old-price">₹56,199</span>
+            </div>
+        </div>
+
+        <!-- CARD 6-->
+         <a href="{% url 'center table_detail' slug='Bagnolet' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">30% OFF</span>
+                <img src="{% static 'images/table6.jpg' %}">
+            </div>
+            <h4>Bagnolet Mango Wood Coffee Table </h4>
+            <div class="price-row">
+                <span class="new-price">₹15,999</span>
+                <span class="old-price">₹22,999</span>
+            </div>
+        </div>
+
+        <!-- CARD 7 -->
+        <a href="{% url 'center table_detail' slug='Allure' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">63% OFF</span>
+                <img src="{% static 'images/table7.jpg' %}">
+            </div>
+            <h4>Allure Wood Top Coffee Table In Brown Finish</h4>
+            <div class="price-row">
+                <span class="new-price">₹3,291</span>
+                <span class="old-price">₹8,990</span>
+            </div>
+        </div>
+
+        <!-- CARD 8-->
+        <a href="{% url 'center table_detail' slug='Alex' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">33% OFF</span>
+                <img src="{% static 'images/table8.jpg' %}">
+            </div>
+            <h4>Alex Coffee Table In Mexican Walnut Finish</h4>
+            <div class="price-row">
+                <span class="new-price">₹3,399</span>
+                <span class="old-price">₹5,044</span>
+            </div>
+        </div>
+
+        <!-- CARD 9 -->
+                <a href="{% url 'center table_detail' slug='Domitz' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">27% OFF</span>
+                <img src="{% static 'images/table9.jpg' %}">
+            </div>
+            <h4>Domitz Sheesham Wood Coffee Table</h4>
+            <div class="price-row">
+                <span class="new-price">₹23,499</span>
+                <span class="old-price">₹31,999</span>
+            </div>
+        </div>
+
+        <!-- CARD 10-->
+        <a href="{% url 'center table_detail' slug='Teshio' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">58% OFF</span>
+                <img src="{% static 'images/table10.jpg' %}">
+            </div>
+            <h4>Teshio Coffee Table in Columbia Walnut & White Finish</h4>
+            <div class="price-row">
+                <span class="new-price">₹3,499</span>
+                <span class="old-price">₹8,391</span>
+            </div>
+        </div>
+
+        <!-- CARD 11 -->
+        <a href="{% url 'center table_detail' slug='Chippa' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">29% OFF</span>
+                <img src="{% static 'images/table11.jpg' %}">
+            </div>
+            <h4>Chippa Solid Coffee Table In Scratch Resistant Tubbaq Finish</h4>
+            <div class="price-row">
+                <span class="new-price">₹23,499</span>
+                <span class="old-price">₹32,999</span>
+            </div>
+        </div>
+        
+        <!-- CARD 12-->
+        <a href="{% url 'center table_detail' slug='Stalley' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">31% OFF</span>
+                <img src="{% static 'images/table12.jpg' %}">
+            </div>
+            <h4>Stalley Sheesham Wood Round Coffee Table in Scratch Resistant Provincial Teak Finish</h4>
+            <div class="price-row">
+                <span class="new-price">₹10,999</span>
+                <span class="old-price">₹15,999</span>
+            </div>
+        </div>
+
+        <!-- CARD 13 -->
+         <a href="{% url 'center table_detail' slug='Jolanta' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">26% OFF</span>
+                <img src="{% static 'images/table13.jpg' %}">
+            </div>
+            <h4>Jolanta Oak Burl Veneer Star Shape Coffee Table in Natural finish</h4>
+            <div class="price-row">
+                <span class="new-price">₹30,499</span>
+                <span class="old-price">₹40,999</span>
+            </div>
+        </div>
+
+        <!-- CARD 14-->
+        <a href="{% url 'center table_detail' slug='Brit' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">39% OFF</span>
+                <img src="{% static 'images/table14.jpg' %}">
+            </div>
+            <h4>Brit Coffee Table In White Stone Top & Velvet Blue Finish</h4>
+            <div class="price-row">
+                <span class="new-price">₹15,990</span>
+                <span class="old-price">₹24,999</span>
+            </div>
+        </div>
+
+        <!-- CARD 15-->
+        <a href="{% url 'center table_detail' slug='Premium' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">63% OFF</span>
+                <img src="{% static 'images/table15.jpg' %}">
+            </div>
+            <h4>Premium White Marble Round Shape Center Table</h4>
+            <div class="price-row">
+                <span class="new-price">₹7,099</span>
+                <span class="old-price">₹18,999</span>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <p>© 2026 Furndecor. All Rights Reserved.</p>
+</div>
+
+</body>
+</html>

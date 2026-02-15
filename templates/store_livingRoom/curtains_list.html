@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Curtains| Furndecor</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbars">
+    <div class="logo">
+        <a href="/">FurnDecor</a>
+    </div>
+
+    <div class="search-box">
+     <form method="get" action="{% url 'search' %}">
+        <input type="text" name="q" placeholder="What are you looking for?">
+         <button type="submit" class="search-icon">🔍︎</button>
+     </form>
+    </div>
+
+    <div class="nav-icons">
+        <a href="{% url 'login' %}">
+             <i class="user-icon"></i>
+<!-- PROFILE ICON -->
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+     xmlns="http://www.w3.org/2000/svg">
+  <circle cx="12" cy="8" r="4" stroke="black" stroke-width="1.5"/>
+  <path d="M4 20c0-4 16-4 16 0"
+        stroke="black" stroke-width="1.5"
+        stroke-linecap="round"/>
+</svg>
+</a>
+    <a href="javascript:void(0)" id="wishlistToggle">
+   ♡ <span class="count">{{ wishlist_count }}</span>
+</a>
+
+<a href="javascript:void(0)" onclick="openCart()">
+    🛒 <span class="count" id="cart-count">0</span>
+</a>
+
+{% include "store_livingRoom/cart.html" %}
+
+</div>
+</div> 
+
+<!--SLIDE PANEL -->
+<div class="wishlist-panel" id="wishlistPanel">
+
+    <div class="wishlist-header">
+        <button id="closeWishlist">←</button>
+        <h3>My Wishlist</h3>
+    </div>
+    {% if wishlist_items %}
+        {% for item in wishlist_items %}
+            <div class="wishlist-item" id="wishlist-item-{{ item.product.id }}">>
+
+                <img src="{{ item.product.variants.first.image.url }}" alt="">
+
+                <div class="wishlist-info">
+                    <p class="wishlist-title">
+                        {{ item.product.name }}
+                    </p>
+
+                    <span class="wishlist-seater">
+                        {{ item.product.variants.first.seater }}
+                    </span>
+
+                    <p class="wishlist-price">
+                        ₹{{ item.product.variants.first.price }}
+                    </p>
+                    
+                    <div class="qty-box">
+    <button type="button" onclick="decreaseQty(this)">-</button>
+    <span class="qtyValue">1</span>
+    <button type="button" onclick="increaseQty(this)">+</button>
+        
+               <button 
+                type="button" 
+                class="cart-btn" 
+                onclick="addToCart({{ selected_variant.id }})">
+                Add To Cart
+               </button>
+
+                    </div>
+                </div>
+
+        <button 
+          class="remove-wishlist-btn"
+          onclick="removeFromWishlist({{ item.product.id }})">
+        🗑
+        </button>
+</div>
+{% endfor %}
+    {% else %}
+        <p>No items in wishlist</p>
+    {% endif %} 
+</div>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="section" style="padding-bottom:20px;">
+    <h2>Furndecor Curtain Collection – Elegance in Every Fold</h2>
+</div>
+
+<!-- SOFA LIST PAGE -->
+<div class="section product-list-page">
+    <div class="product-grid">
+
+        <!-- CARD 1 -->   
+    <a href="{% url 'curtains_detail' slug='Birds' %}"  class="product-link">    
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">64% OFF</span>
+                <img src="{% static 'images/curtain1.jpg' %}">
+            </div>
+            <h4>Birds Printed Cotton Curtain | Light Filtering Curtains | Curtain for Living Room | (116 x 215 cm, White & Red) | Perfect for Home Decor| Curtains 7 Feet Long 4 Piece </h4>
+            <div class="price-row">
+                <span class="new-price">₹1,239</span>
+                <span class="old-price">₹3,398</span>
+            </div>
+        </div>
+    </a>  
+
+       <!-- CARD 2 -->
+    <a href="{% url 'curtains_detail' slug='Urban' %}"  class="product-link"> 
+        <div class="product-card">
+           <div class="product-img">
+                <span class="discount">64% OFF</span>
+                <img src="{% static 'images/curtain2.jpg' %}">
+            </div>
+            <h4>Urban Space Abstract Bohemian Decorative Curtain for Window,100% Cotton Curtain 5 Feet Long,1 Piece Curtain</h4>
+            <div class="price-row">
+                 <span class="new-price">₹729</span>
+                 <span class="old-price">₹1,999</span>
+            </div>
+       </div>
+    </a>
+
+        <!-- CARD 3 -->
+    <a href="{% url 'curtains_detail' slug='Tranquebar' %}"  class="product-link"> 
+        <div class="product-card">
+           <div class="product-img">
+                <span class="discount">35% OFF</span>
+                <img src="{% static 'images/curtain3.jpg' %}">
+            </div>
+            <h4>Tranquebar Curtain Co. Window Curtains 5 Feet - Set of 2</h4>
+            <div class="price-row">
+                 <span class="new-price">₹1,294</span>
+                 <span class="old-price">₹2,000</span>
+            </div>
+       </div>
+    </a>
+
+        <!-- CARD 4 -->
+    <a href="{% url 'curtains_detail' slug='Decomizer' %}"  class="product-link"> 
+        <div class="product-card">
+           <div class="product-img">
+                <span class="discount">69% OFF</span>
+                <img src="{% static 'images/curtain4.jpg' %}">
+            </div>
+            <h4>DECOMIZER flower Opaque Super Soft Brushed Microfiber Cotton Door Curtains</h4>
+            <div class="price-row">
+                 <span class="new-price">₹616</span>
+                 <span class="old-price">₹1,999</span>
+            </div>
+       </div>
+    </a>
+         <!-- CARD 5 -->
+    <a href="{% url 'curtains_detail' slug='Galaxy' %}"  class="product-link"> 
+        <div class="product-card">
+           <div class="product-img">
+                <span class="discount">35% OFF</span>
+                <img src="{% static 'images/curtain5.jpg' %}">
+            </div>
+            <h4>Galaxy Home Decor 1 Piece Premium Blackout Faux Silk Superior Curtains</h4>
+            <div class="price-row">
+                 <span class="new-price">₹649</span>
+                 <span class="old-price">₹999</span>
+            </div>
+       </div>
+    </a>
+
+        <!-- CARD 6-->
+    <a href="{% url 'curtains_detail' slug='Fresh' %}"  class="product-link"> 
+        <div class="product-card">
+           <div class="product-img">
+                <span class="discount">51% OFF</span>
+                <img src="{% static 'images/curtain6.jpg' %}">
+            </div>
+            <h4>FRESH FROM LOOM Supreme Texture Polyester Curtains for Home 7 Feet Padre| Semi Black Out 80% Room Darkening Screens</h4>
+            <div class="price-row">
+                 <span class="new-price">₹1,270</span>
+                 <span class="old-price">₹2,599</span>
+            </div>
+       </div>
+    </a> 
+
+       <!-- CARD 7-->
+    <a href="{% url 'curtains_detail' slug='Sunflower' %}"  class="product-link"> 
+        <div class="product-card">
+           <div class="product-img">
+                <span class="discount">43% OFF</span>
+                <img src="{% static 'images/curtain7.jpg' %}">
+            </div>
+            <h4>HOMEMONDE Sun Flower Printed Curtains 5 Feet Window - Cotton Sheer Transparent Curtain Set of 2</h4>
+            <div class="price-row">
+                 <span class="new-price">₹856</span>
+                 <span class="old-price">₹1,499</span>
+            </div>
+       </div>
+    </a>     
+
+        <!-- CARD 8-->
+        <a href="{% url 'curtains_detail' slug='Modern' %}"  class="product-link"> 
+        <div class="product-card">
+           <div class="product-img">
+                <span class="discount">91% OFF</span>
+                <img src="{% static 'images/curtain8.jpg' %}">
+            </div>
+            <h4>Galaxy Home Decor Modern Wave Panel Polyester Curtains for Door 7 Feet, Pack of 1, Brown (Brown, 7 Feet (1 Piece))</h4>
+            <div class="price-row">
+                 <span class="new-price">₹177</span>
+                 <span class="old-price">₹1,999</span>
+            </div>
+       </div>
+    </a>     
+
+        <!-- CARD 9 -->
+        <a href="{% url 'curtains_detail' slug='Polyster' %}"  class="product-link"> 
+        <div class="product-card">
+           <div class="product-img">
+                <span class="discount">82% OFF</span>
+                <img src="{% static 'images/curtain9.jpg' %}">
+            </div>
+            <h4>Galaxy Home Decor Polyester Cross Printed Curtains for Door 7 Feet, Pack of 1, Brown (1Pc, Brown, 7 Feet)</h4>
+            <div class="price-row">
+                 <span class="new-price">₹175</span>
+                 <span class="old-price">₹999</span>
+            </div>
+       </div>
+    </a>     
+
+        <!-- CARD 10-->
+    <a href="{% url 'curtains_detail' slug='Blackout' %}"  class="product-link"> 
+        <div class="product-card">
+           <div class="product-img">
+                <span class="discount">63% OFF</span>
+                <img src="{% static 'images/curtain10.jpg' %}">
+            </div>
+            <h4>Blackout Door Curtains 7 Feet Long Set of 2 | Room Darkening Curtain | Gradient Printed | Ombre Curtains for Living Room |</h4>
+            <div class="price-row">
+                 <span class="new-price">₹1,499</span>
+                 <span class="old-price">₹3,998</span>
+            </div>
+       </div>
+    </a>     
+
+
+        <!-- CARD 11 -->
+    <a href="{% url 'curtains_detail' slug='Butterfly' %}"  class="product-link"> 
+        <div class="product-card">
+           <div class="product-img">
+                <span class="discount">35% OFF</span>
+                <img src="{% static 'images/curtain11.jpg' %}">
+            </div>
+            <h4>Tranquebar Curtain Co. Window Curtains 5 Feet, 60-65% Room Darkening, Blue Butterfly & Floral Print, Cotton Curtains for Window</h4>
+            <div class="price-row">
+                 <span class="new-price">₹1,294</span>
+                 <span class="old-price">₹2,000</span>
+            </div>
+       </div>
+    </a>     
+        
+        <!-- CARD 12-->
+    <a href="{% url 'curtains_detail' slug='Floral' %}"  class="product-link"> 
+        <div class="product-card">
+           <div class="product-img">
+                <span class="discount">41% OFF</span>
+                <img src="{% static 'images/curtain12.jpg' %}">
+            </div>
+            <h4>Floral Net Semi Sheer Grommet Curtains for Living Room/Bedroom, 7 feet Door, Cream, Set of 2</h4>
+            <div class="price-row">
+                 <span class="new-price">₹532</span>
+                 <span class="old-price">₹899</span>
+            </div>
+       </div>
+    </a>     
+
+        <!-- CARD 13 -->
+    <a href="{% url 'curtains_detail' slug='Cortina' %}"  class="product-link"> 
+        <div class="product-card">
+           <div class="product-img">
+                <span class="discount">71% OFF</span>
+                <img src="{% static 'images/curtain13.jpg' %}">
+            </div>
+            <h4>Cortina Self Print Light-Filtering 100% Cotton Curtains 5 feet Long Set of 1 for Window [ Opacity: 50-60%, Color: Sky Blue, 180 GSM ]</h4>
+            <div class="price-row">
+                 <span class="new-price">₹559</span>
+                 <span class="old-price">₹1899</span>
+            </div>
+       </div>
+    </a>     
+
+        <!-- CARD 14-->
+    <a href="{% url 'curtains_detail' slug='Weaves' %}"  class="product-link"> 
+        <div class="product-card">
+           <div class="product-img">
+                <span class="discount">52% OFF</span>
+                <img src="{% static 'images/curtain14.jpg' %}">
+            </div>
+            <h4>Yellow Weaves Rich Jacquard Fabric Curtains for Door, Lilac Leaf, 7 Feet, Pack of 2, Beige Brown,Eyelet</h4>
+            <div class="price-row">
+                 <span class="new-price">₹1,249</span>
+                 <span class="old-price">₹2,579</span>
+            </div>
+       </div>
+    </a>     
+
+        <!-- CARD 15-->
+        <a href="{% url 'curtains_detail' slug='Kids' %}"  class="product-link"> 
+        <div class="product-card">
+           <div class="product-img">
+                <span class="discount">35% OFF</span>
+                <img src="{% static 'images/curtain15.jpg' %}">
+            </div>
+            <h4>Tranquebar Curtain Co. Kids Room Curtain, 60-65% Room Darkening, Multicolor Elephant Print - Set of 2</h4>
+            <div class="price-row">
+                 <span class="new-price">₹1,636</span>
+                 <span class="old-price">₹2,500</span>
+            </div>
+       </div>
+    </a>     
+
+
+    </div>
+</div>
+
+<!-- FOOTER -->
+<!-- FOOTER -->
+{% include "partials/footer.html" %}
+
+</body>
+</html>

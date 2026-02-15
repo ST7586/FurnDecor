@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Carpets| Furndecor</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbars">
+    <div class="logo">
+        <a href="/">FurnDecor</a>
+    </div>
+
+    <div class="search-box">
+     <form method="get" action="{% url 'search' %}">
+        <input type="text" name="q" placeholder="What are you looking for?">
+         <button type="submit" class="search-icon">🔍︎</button>
+     </form>
+    </div>
+
+    <div class="nav-icons">
+        <a href="{% url 'login' %}">
+             <i class="user-icon"></i>
+<!-- PROFILE ICON -->
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+     xmlns="http://www.w3.org/2000/svg">
+  <circle cx="12" cy="8" r="4" stroke="black" stroke-width="1.5"/>
+  <path d="M4 20c0-4 16-4 16 0"
+        stroke="black" stroke-width="1.5"
+        stroke-linecap="round"/>
+</svg>
+</a>
+    <a href="javascript:void(0)" id="wishlistToggle">
+   ♡ <span class="count">{{ wishlist_count }}</span>
+</a>
+
+<a href="javascript:void(0)" onclick="openCart()">
+    🛒 <span class="count" id="cart-count">0</span>
+</a>
+
+{% include "store_livingRoom/cart.html" %}
+
+</div>
+</div> 
+
+<!--SLIDE PANEL -->
+<div class="wishlist-panel" id="wishlistPanel">
+
+    <div class="wishlist-header">
+        <button id="closeWishlist">←</button>
+        <h3>My Wishlist</h3>
+    </div>
+    {% if wishlist_items %}
+        {% for item in wishlist_items %}
+            <div class="wishlist-item" id="wishlist-item-{{ item.product.id }}">>
+
+                <img src="{{ item.product.variants.first.image.url }}" alt="">
+
+                <div class="wishlist-info">
+                    <p class="wishlist-title">
+                        {{ item.product.name }}
+                    </p>
+
+                    <span class="wishlist-seater">
+                        {{ item.product.variants.first.seater }}
+                    </span>
+
+                    <p class="wishlist-price">
+                        ₹{{ item.product.variants.first.price }}
+                    </p>
+                    
+                    <div class="qty-box">
+    <button type="button" onclick="decreaseQty(this)">-</button>
+    <span class="qtyValue">1</span>
+    <button type="button" onclick="increaseQty(this)">+</button>
+        
+               <button 
+                type="button" 
+                class="cart-btn" 
+                onclick="addToCart({{ selected_variant.id }})">
+                Add To Cart
+               </button>
+
+                    </div>
+                </div>
+
+        <button 
+          class="remove-wishlist-btn"
+          onclick="removeFromWishlist({{ item.product.id }})">
+        🗑
+        </button>
+</div>
+{% endfor %}
+    {% else %}
+        <p>No items in wishlist</p>
+    {% endif %} 
+</div>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="section" style="padding-bottom:20px;">
+    <h2 class="section-title">Carpets</h2>
+    <p>Luxury Floor Carpets</p>
+</div>
+
+<!-- PRODUCT LIST PAGE -->
+<div class="section product-list-page">
+    <div class="product-grid">
+
+        <!-- CARD 1 -->   
+    <a href="{% url 'carpets_detail' slug='Geometric' %}"  class="product-link"> 
+        <div class="product-card">
+            <div class="product-img">
+                 <span class="discount">64% OFF</span>
+                <img src="{% static 'images/carpet1.jpg' %}">
+            </div>
+            <h4>Geometric Pattern Wool Hand Tufted Carpets</h4>
+            <div class="price-row">
+                <span class="new-price">₹1,239</span>
+                <span class="old-price">₹3,398</span>
+            </div>
+        </div>
+    </a>  
+
+       <!-- CARD 2 -->
+    <a href="{% url 'carpets_detail' slug='Grey' %}"  class="product-link"> 
+        <div class="product-card">
+            <div class="product-img">
+                 <span class="discount">35% OFF</span>
+                <img src="{% static 'images/carpet2.jpg' %}">
+            </div>
+            <h4>Grey Floral Wool Carpets</h4>
+            <div class="price-row">
+                <span class="new-price">₹1,294</span>
+                 <span class="old-price">₹2,000</span>
+            </div>
+        </div>
+    </a>
+
+        <!-- CARD 3 -->
+    <a href="{% url 'carpets_detail' slug='Pink' %}"  class="product-link"> 
+        <div class="product-card">
+            <div class="product-img">
+                 <span class="discount">64% OFF</span>
+                <img src="{% static 'images/carpet3.jpg' %}">
+            </div>
+            <h4>Pink Wool Floral 3 x 5 Feet Hand Tufted Carpet</h4>
+            <div class="price-row">
+                <span class="new-price">₹1,230</span>
+                <span class="old-price">₹3,450</span>
+            </div>
+        </div>
+    </a>
+
+        <!-- CARD 4 -->
+    <a href="{% url 'carpets_detail' slug='Brown' %}"  class="product-link"> 
+        <div class="product-card">
+            <div class="product-img">
+                 <span class="discount">45% OFF</span>
+                <img src="{% static 'images/carpet4.jpg' %}">
+            </div>
+            <h4>Brown Solid Wool Carpets</h4>
+            <div class="price-row">
+              <span class="new-price">₹1,880</span>
+              <span class="old-price">₹3,400</span>   
+            </div>
+        </div>
+    </a>
+
+         <!-- CARD 5 -->
+    <a href="{% url 'carpets_detail' slug='Cotton' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                 <span class="discount">38% OFF</span>
+                <img src="{% static 'images/carpet5.jpg' %}">
+            </div>
+            <h4>Pink Geometric Cotton Carpets</h4>
+            <div class="price-row">
+             <span class="new-price">₹2,220</span>
+             <span class="old-price">₹3,599</span>
+            </div>
+        </div>
+    </a>
+
+        <!-- CARD 6-->
+    <a href="{% url 'carpets_detail' slug='Beige' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                 <span class="discount">51% OFF</span>
+                <img src="{% static 'images/carpet6.jpg' %}">
+            </div>
+            <h4>Beige Wool and Viscose Carpets</h4>
+            <div class="price-row">
+                <span class="new-price">₹1,270</span>
+                 <span class="old-price">₹2,599</span>
+            </div>
+        </div>
+    </a>
+
+        <!-- CARD 7 -->
+    <a href="{% url 'carpets_detail' slug='Wool' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                 <span class="discount">35% OFF</span>
+                <img src="{% static 'images/carpet7.jpg' %}">
+            </div>
+            <h4>Grey Geometric Wool And Viscose 4X6 Hand-Tufted Carpet</h4>
+            <div class="price-row">
+              <span class="new-price">₹649</span>
+              <span class="old-price">₹999</span>  
+            </div>
+        </div>
+    </a>
+
+        <!-- CARD 8-->
+    <a href="{% url 'carpets_detail' slug='Blue' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                 <span class="discount">51% OFF</span>
+                <img src="{% static 'images/carpet8.jpg' %}">
+            </div>
+            <h4>Buy Blue Wool and Viscose Abstract 5 x 7 Feet Hand Tufted Carpet</h4>
+            <div class="price-row">
+                 <span class="new-price">₹1,270</span>
+                 <span class="old-price">₹2,599</span>
+            </div>
+        </div>
+    </a>
+
+        <!-- CARD 9 -->
+    <a href="{% url 'carpets_detail' slug='Viscose' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                 <span class="discount">51% OFF</span>
+                <img src="{% static 'images/carpet9.jpg' %}">
+            </div>
+            <h4>Beige Wool and Viscose Abstract 6 x 8 Feet Hand Tufted Carpet</h4>
+            <div class="price-row">
+                <span class="new-price">₹1,270</span>
+                <span class="old-price">₹2,599</span>
+            </div>
+        </div>
+    </a>
+
+        <!-- CARD 10-->
+    <a href="{% url 'carpets_detail' slug='Carpet10' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                 <span class="discount">43% OFF</span>
+                <img src="{% static 'images/carpet10.jpg' %}">
+            </div>
+            <h4>Beige Wool and Viscose Abstract 6 x 8 Feet Hand Tufted Carpet</h4>
+            <div class="price-row">
+                 <span class="new-price">₹856</span>
+                 <span class="old-price">₹1,499</span>
+            </div>
+        </div>
+    </a>
+
+        <!-- CARD 11 -->
+    <a href="{% url 'carpets_detail' slug='Teal' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                 <span class="discount">35% OFF</span>
+                <img src="{% static 'images/carpet11.jpg' %}">
+            </div>
+            <h4>Teal Wool and Viscose Abstract 6 x 8 Feet Hand Tufted Carpet</h4>
+            <div class="price-row">
+                <span class="new-price">₹1,294</span>
+                <span class="old-price">₹2,000</span>
+            </div>
+        </div>
+    </a>
+        
+        <!-- CARD 12-->
+    <a href="{% url 'carpets_detail' slug='Rose' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                 <span class="discount">50% OFF</span>
+                <img src="{% static 'images/carpet12.jpg' %}">
+            </div>
+            <h4>Rose Geometrical Wool 5x8 Feet Hand Woven Carpet</h4>
+            <div class="price-row">
+                 <span class="new-price">₹2,150</span>
+                 <span class="old-price">₹4,320</span>
+            </div>
+        </div>
+    </a>
+
+        <!-- CARD 13 -->
+    <a href="{% url 'carpets_detail' slug='Round' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">66% OFF</span>
+                <img src="{% static 'images/carpet13.jpg' %}">
+            </div>
+            <h4>Red Solid Wool 3 ft x 3 ft Hand Woven Round Carpet</h4>
+            <div class="price-row">
+                <span class="new-price">₹975</span>
+                <span class="old-price">₹2899</span>
+            </div>
+        </div>
+    </a>
+
+        <!-- CARD 14-->
+    <a href="{% url 'carpets_detail' slug='Multi' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                 <span class="discount">63% OFF</span>
+                <img src="{% static 'images/carpet14.jpg' %}">
+            </div>
+            <h4>Multi Geometrical N.Z Wool 5x8 Feet Hand Woven Carpet</h4>
+            <div class="price-row">
+                <span class="new-price">₹1,499</span>
+                <span class="old-price">₹3,998</span>
+            </div>
+        </div>
+    </a>
+
+        <!-- CARD 15-->
+    <a href="{% url 'carpets_detail' slug='Jute' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                 <span class="discount">50% OFF</span>
+                <img src="{% static 'images/carpet15.jpg' %}">
+            </div>
+            <h4>Multicolor Jute 2 Feet Round Carpet</h4>
+            <div class="price-row">
+                <span class="new-price">₹449</span>
+                <span class="old-price">₹899</span>
+            </div>
+        </div>
+    </a>
+
+
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <p>© 2026 Furndecor. All Rights Reserved.</p>
+</div>
+
+</body>
+</html>
+

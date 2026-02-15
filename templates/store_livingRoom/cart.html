@@ -1,0 +1,132 @@
+
+<style>
+.cart-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 380px;
+    height: 100vh;
+    background: #ffffff;
+    box-shadow: -4px 0 15px rgba(0,0,0,0.2);
+    transform: translateX(100%);
+    transition: transform 0.35s ease;
+    z-index: 99999;
+    padding: 16px;
+    overflow-y: auto;
+}
+.cart-panel.open {
+    transform: translateX(0);
+}
+
+.cart-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    border-bottom:1px solid #eee;
+    padding-bottom:10px;
+    margin-bottom:10px;
+}
+
+.close-btn{
+    border:none;
+    background:none;
+    font-size:20px;
+    cursor:pointer;
+}
+
+.cart-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.cart-remove{
+    font-size:18px;
+    color:red;
+    text-decoration:none;
+    cursor:pointer;
+}
+</style>
+
+<div id="cart-panel" class="cart-panel">
+    <div class="cart-header">
+        <h3>Your Cart</h3>
+        <button onclick="closeCart()" class="close-btn">✕</button>
+    </div>
+
+    <div id="cart-items"></div>
+
+</div>
+
+<script>
+function openCart(){
+    fetch("/get-cart-items/")
+    .then(res => res.json())
+    .then(data => {
+        const panel = document.getElementById("cart-panel");
+        const box = document.getElementById("cart-items");
+
+        panel.classList.add("open");
+        box.innerHTML = "";
+
+        if (data.items.length === 0){
+            box.innerHTML = "<p>Your cart is empty</p>";
+            return;
+        }
+
+        data.items.forEach(item => {
+            box.innerHTML += `
+                <div class="cart-item">
+                    <img src="${item.image}" width="70">
+
+                    <div style="flex:1">
+                        <p><b>${item.product}</b></p>
+                        <p>${item.variant}</p>
+                        <p>₹${item.price}</p>
+                    </div>
+
+                    <a class="cart-remove"
+                       href="/remove-cart-item/${item.id}/">🗑</a>
+                </div>
+            `;
+        });
+    });
+}
+
+function closeCart(){
+    document.getElementById("cart-panel").classList.remove("open");
+}
+
+function addToCart(variantId){
+    fetch(`/add-to-cart/${variantId}/`, {
+        method: "POST",
+        headers: {
+            "X-CSRFToken": "{{ csrf_token }}"
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log("ADD RESPONSE:", data);
+
+        const countEl = document.getElementById("cart-count");
+        if (countEl){
+            countEl.innerText = data.cart_count;
+        }
+
+        openCart(); // optional: cart auto-open
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    fetch("/get-cart-count/")
+        .then(res => res.json())
+        .then(data => {
+            const countEl = document.getElementById("cart-count");
+            if (countEl) {
+                countEl.innerText = data.count;
+            }
+        });
+});
+
+</script>

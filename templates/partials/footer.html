@@ -1,0 +1,83 @@
+<!-- FOOTER -->
+{% load static %}
+<footer class="footer">
+
+  <div class="footer-top">
+
+    <!-- LOGO -->
+    <div class="footer-logo">
+      <img src="{% static 'images/logo.jpg' %}" alt="FurnDecor">
+    </div>
+
+    <!-- CUSTOMER SERVICE -->
+    <div class="footer-col">
+      <h4>Customer Service</h4>
+      <a href="{% url 'cancellation_policy' %}">Cancellation Policy</a><br>
+      <a href="{% url 'warranty_policy' %}">Service Assurance / Warranty</a>
+      <a href="{% url 'faqs' %}">FAQ</a>
+      <a href="/terms/">Terms & Conditions</a>
+    </div>
+
+    <!-- ABOUT -->
+    <div class="footer-col">
+      <h4>About FurnDecor</h4>
+      <a href="/about/">About Us</a>
+      <a href="{% url 'blog_list' %}">Blogs</a>
+      <a href="/about/">Corporate Website</a>
+      <a href="/sitemap/">Sitemap</a>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="footer-col">
+      <h4>Contact Us</h4>
+
+      <div class="contact-row">
+        <span class="icon pink">✉</span>
+        <a href="mailto:care@furndecor.in">care@furndecor.in</a>
+      </div>
+
+      <div class="contact-row">
+        <span class="icon green">☎</span>
+        <a href="tel:08069252525">9156767586 (10AM – 7PM)</a>
+      </div>
+
+      <div class="contact-row">
+        <a href="{% url 'store_locator' %}">📍</a>
+        <a href="/store-locator/">Store Locator</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- LOCATIONS -->
+  <div class="locations">
+    <h4>Locations</h4>
+    <p>
+      <a href="{% url 'store_locator' %}">Aurangabad</a> |
+      <a href="{% url 'store_locator' %}">Ahmedabad</a> |
+      <a href="{% url 'store_locator' %}">Bhubaneswar</a> |
+      <a href="{% url 'store_locator' %}">Guwahati</a> |
+      <a href="{% url 'store_locator' %}">Hyderabad</a> |
+      <a href="{% url 'store_locator' %}">Kolkata</a> |
+      <a href="{% url 'store_locator' %}">Lucknow</a> |
+      <a href="{% url 'store_locator' %}">Nagpur</a> |
+      <a href="{% url 'store_locator' %}">Nashik</a> |
+      <a href="{% url 'store_locator' %}">Patna</a> |
+      <a href="{% url 'store_locator' %}">Pune</a> |
+      <a href="{% url 'store_locator' %}">Raipur</a> |
+      <a href="{% url 'store_locator' %}">Siliguri</a> |
+      <a href="{% url 'store_locator' %}">Visakhapatnam</a>
+    </p>
+  </div>
+
+  <!-- BOTTOM -->
+  <div class="footer-bottom">
+    <span>© 2026 FurnDecor</span>
+
+    <span class="bottom-links">
+      <a href="/terms/">Terms & Conditions</a> |
+      <a href="/contact/">Contact Information</a>
+    </span>
+  </div>
+
+</footer>

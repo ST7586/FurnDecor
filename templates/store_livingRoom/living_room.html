@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Living Room | Furndecor</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<!-- NAVBAR -->
+<div class="navbars">
+    <div class="logo">
+        <div class="footer-logo"> <img src="{% static 'images/logo.jpg' %}" alt="FurnDecor"></div>
+    </div>
+
+    <div class="nav-icons">
+        <a href="{% url 'login' %}">
+             <i class="user-icon"></i>
+<!-- PROFILE ICON -->
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+     xmlns="http://www.w3.org/2000/svg">
+  <circle cx="12" cy="8" r="4" stroke="black" stroke-width="1.5"/>
+  <path d="M4 20c0-4 16-4 16 0"
+        stroke="black" stroke-width="1.5"
+        stroke-linecap="round"/>
+</svg>
+</a>
+    <a href="javascript:void(0)" id="wishlistToggle">
+   ♡ <span class="count">{{ wishlist_count }}</span>
+</a>
+
+<a href="javascript:void(0)" onclick="openCart()">
+    🛒 <span class="count" id="cart-count">0</span>
+</a>
+
+{% include "store_livingRoom/cart.html" %}
+
+</div>
+</div>
+
+<!-- WISHLIST SLIDE PANEL -->
+<div class="wishlist-panel" id="wishlistPanel">
+
+    <div class="wishlist-header">
+        <button id="closeWishlist">←</button>
+        <h3>My Wishlist</h3>
+    </div>
+    {% if wishlist_items %}
+        {% for item in wishlist_items %}
+            <div class="wishlist-item" id="wishlist-item-{{ item.product.id }}">>
+
+                <img src="{{ item.product.variants.first.image.url }}" alt="">
+
+                <div class="wishlist-info">
+                    <p class="wishlist-title">
+                        {{ item.product.name }}
+                    </p>
+
+                    <span class="wishlist-seater">
+                        {{ item.product.variants.first.seater }}
+                    </span>
+
+                    <p class="wishlist-price">
+                        ₹{{ item.product.variants.first.price }}
+                    </p>
+                    <div class="qty-box">
+                 <button onclick="decreaseQty()">-</button>
+                 <span id="qtyValue">1</span>
+                 <button onclick="increaseQty()">+</button>
+        
+                        <button class="add-cart-btn">
+                            Add To Cart
+                        </button>
+                    </div>
+                </div>
+
+        <button 
+          class="remove-wishlist-btn"
+          onclick="removeFromWishlist({{ item.product.id }})">
+        🗑
+        </button>
+</div>
+{% endfor %}
+    {% else %}
+        <p>No items in wishlist</p>
+    {% endif %} 
+</div>
+</div>
+<!-- PAGE HEADER -->
+<div class="hero" style="padding:80px 20px;">
+    <h1>Living Room Furniture</h1>
+    <p>Comfort, style & functionality for your living space</p>
+</div>
+
+<!-- CATEGORY ITEMS -->
+<!-- CATEGORY ITEMS SECTION -->
+<div class="section">
+    <h2 class="section-title">Explore Categories</h2>
+
+    <div class="space-grid living-grid">
+
+        <a href="/living-room/sofas/" class="space-card">
+            <img src="{% static 'images/sofa.jpg' %}">
+            <div class="space-label">Sofas</div>
+        </a>
+
+        <a href="/living-room/curtains/" class="space-card">
+            <img src="{% static 'images/curtains.jpg' %}">
+            <div class="space-label">Curtains</div>
+        </a>
+
+        <a href="/living-room/center table/" class="space-card">
+            <img src="{% static 'images/center_table.jpg' %}">
+            <div class="space-label">Center Tables</div>
+        </a>
+
+        
+        <a href="/living-room/carpets/" class="space-card">
+            <img src="{% static 'images/carpet.jpg' %}">
+            <div class="space-label">Carpets</div>
+        </a>
+
+         <a href="/living-room/tv_media_units/" class="space-card">
+            <img src="{% static 'images/tv_units.jpg' %}">
+            <div class="space-label">TV Media Units</div>
+        </a>
+             
+        
+         <a href="/living-room/chairs/" class="space-card">
+            <img src="{% static 'images/chair.jpg' %}">
+            <div class="space-label">Chairs</div>
+        </a>
+
+        <a href="/living-room/side-tables/" class="space-card">
+            <img src="{% static 'images/side_table.jpg' %}">
+            <div class="space-label">Side Tables</div>
+        </a>
+
+        
+         <a href="/living-room/cabinets-sideboards/" class="space-card">
+            <img src="{% static 'images/cabinets and sideboards.jpg' %}">
+            <div class="space-label">Cabinets & Sideboards</div>
+        </a>
+
+        
+         <a href="/living-room/wall-art-shelves/" class="space-card">
+            <img src="{% static 'images/wall.jpg' %}">
+            <div class="space-label">Wall Art & Shelves</div>
+        </a>
+
+        <a href="/living-room/lighting/" class="space-card">
+            <img src="{% static 'images/lights.jpg' %}">
+            <div class="space-label">Lighting</div>
+        </a>
+
+    </div>
+</div>
+
+<!-- FOOTER -->
+{% include "partials/footer.html" %}
+
+<script src="{% static 'js/script.js' %}"></script>
+
+</body>
+</html>

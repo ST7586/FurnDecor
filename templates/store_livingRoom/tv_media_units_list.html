@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sofas | Furndecor</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbars">
+    <div class="logo">
+        <a href="/">FurnDecor</a>
+    </div>
+
+    <div class="search-box">
+     <form method="get" action="{% url 'search' %}">
+        <input type="text" name="q" placeholder="What are you looking for?">
+         <button type="submit" class="search-icon">🔍︎</button>
+     </form>
+    </div>
+
+    <div class="nav-icons">
+        <a href="{% url 'login' %}">
+             <i class="user-icon"></i>
+<!-- PROFILE ICON -->
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+     xmlns="http://www.w3.org/2000/svg">
+  <circle cx="12" cy="8" r="4" stroke="black" stroke-width="1.5"/>
+  <path d="M4 20c0-4 16-4 16 0"
+        stroke="black" stroke-width="1.5"
+        stroke-linecap="round"/>
+</svg>
+</a>
+    <a href="javascript:void(0)" id="wishlistToggle">
+   ♡ <span class="count">{{ wishlist_count }}</span>
+</a>
+
+<a href="javascript:void(0)" onclick="openCart()">
+    🛒 <span class="count" id="cart-count">0</span>
+</a>
+
+{% include "store_livingRoom/cart.html" %}
+
+</div>
+</div> 
+
+<!--SLIDE PANEL -->
+<div class="wishlist-panel" id="wishlistPanel">
+
+    <div class="wishlist-header">
+        <button id="closeWishlist">←</button>
+        <h3>My Wishlist</h3>
+    </div>
+    {% if wishlist_items %}
+        {% for item in wishlist_items %}
+            <div class="wishlist-item" id="wishlist-item-{{ item.product.id }}">>
+
+                <img src="{{ item.product.variants.first.image.url }}" alt="">
+
+                <div class="wishlist-info">
+                    <p class="wishlist-title">
+                        {{ item.product.name }}
+                    </p>
+
+                    <span class="wishlist-seater">
+                        {{ item.product.variants.first.seater }}
+                    </span>
+
+                    <p class="wishlist-price">
+                        ₹{{ item.product.variants.first.price }}
+                    </p>
+                    
+                    <div class="qty-box">
+    <button type="button" onclick="decreaseQty(this)">-</button>
+    <span class="qtyValue">1</span>
+    <button type="button" onclick="increaseQty(this)">+</button>
+        
+               <button 
+                type="button" 
+                class="cart-btn" 
+                onclick="addToCart({{ selected_variant.id }})">
+                Add To Cart
+               </button>
+
+                    </div>
+                </div>
+
+        <button 
+          class="remove-wishlist-btn"
+          onclick="removeFromWishlist({{ item.product.id }})">
+        🗑
+        </button>
+</div>
+{% endfor %}
+    {% else %}
+        <p>No items in wishlist</p>
+    {% endif %} 
+</div>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="section" style="padding-bottom:20px;">
+    <h2 class="section-title">TV MEDIA UNITS</h2>
+    <p>Elegant TV Units for Modern Homes</p>
+</div>
+
+
+<!-- SOFA LIST PAGE -->
+<div class="section product-list-page">
+    <div class="product-grid">
+
+        <!-- CARD 1 -->
+    <a href="{% url 'tv_media_units_detail' slug='Clary' %}"  class="product-link">    
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">60% OFF</span>
+                <img src="{% static 'images/tv1.jpg' %}">
+            </div>
+            <h4>Home Centre Clary TV Unit | Engineered Wood TV Unit | Brown Colour| 1 Year Warranty</h4>
+            <div class="price-row">
+                <span class="new-price">₹7,998</span>
+                <span class="old-price">₹19,997</span>
+            </div>
+        </div>
+    </a> 
+
+       <!-- CARD 2 -->
+ <a href="{% url 'tv_media_units_detail' slug='Isla' %}"  class="product-link">
+     <div class="product-link">  
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">60% OFF</span>
+                <img src="{% static 'images/tv2.jpg' %}">
+            </div>
+            <h4>Home Centre Engineered Wood Isla Tv Unit - Brown,155 x40 x158 Cm</h4>
+            <div class="price-row">
+                <span class="new-price">₹11,999</span>
+                <span class="old-price">₹29,998</span>
+            </div>
+        </div>
+    </div>
+</a>
+
+        <!-- CARD 3 -->
+    <a href="{% url 'tv_media_units_detail' slug='Gilly' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">10% OFF</span>
+                <img src="{% static 'images/tv3.jpg' %}">
+            </div>
+            <h4>Home Centre Gilly Sintered Stone Top TV Unit - Beige</h4>
+            <div class="price-row">
+                <span class="new-price">₹39,999</span>
+                <span class="old-price">₹99,999</span>
+            </div>
+        </div>
+    </a>
+
+        <!-- CARD 4 -->
+    <a href="{% url 'tv_media_units_detail' slug='Helios' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">35% OFF</span>
+                <img src="{% static 'images/tv4.jpg' %}">
+            </div>
+            <h4>Home Centre Helios Provoli Engineered Wood TV Unit, Walnut, 47 * 15 * 19 inches</h4>
+            <div class="price-row">
+                <span class="new-price">₹9,999</span>
+                <span class="old-price">₹15,338</span>
+            </div>
+        </div>
+    </a>
+
+         <!-- CARD 5 -->
+    <a href="{% url 'tv_media_units_detail' slug='Hadley' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">50% OFF</span>
+                <img src="{% static 'images/tv5.jpg' %}">
+            </div>
+            <h4>Hadley TV Unit - Walnut</h4>
+            <div class="price-row">
+                <span class="new-price">₹29,999</span>
+                <span class="old-price">₹59,998</span>
+            </div>
+        </div>
+
+        <!-- CARD 6-->
+    <a href="{% url 'tv_media_units_detail' slug='Cream' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">20% OFF</span>
+                <img src="{% static 'images/tv6.jpg' %}">
+            </div>
+            <h4>Home Centre Home Shores TV Unit - Cream</h4>
+            <div class="price-row">
+                <span class="new-price">₹39,999</span>
+                <span class="old-price">₹49,999</span>
+            </div>
+        </div>
+
+        <!-- CARD 7 -->
+    <a href="{% url 'tv_media_units_detail' slug='Herman' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">20% OFF</span>
+                <img src="{% static 'images/tv7.jpg' %}">
+            </div>
+            <h4>Home Centre Herman Faux Marbel Top TV Unit - Grey</h4>
+            <div class="price-row">
+                <span class="new-price">₹42,999</span>
+                <span class="old-price">₹53,749</span>
+            </div>
+        </div>
+
+        <!-- CARD 8-->
+    <a href="{% url 'tv_media_units_detail' slug='liser' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">50% OFF</span>
+                <img src="{% static 'images/tv8.jpg' %}">
+            </div>
+            <h4>Helios Liser Sheesham Wood TV Unit - Brown</h4>
+            <div class="price-row">
+                <span class="new-price">₹19,999</span>
+                <span class="old-price">₹39,998</span>
+            </div>
+        </div>
+    </a>
+
+        <!-- CARD 9 -->
+    <a href="{% url 'tv_media_units_detail' slug='senorita' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">20% OFF</span>
+                <img src="{% static 'images/tv9.jpg' %}">
+            </div>
+            <h4>Home Cente Senorita TV Unit - Cream</h4>
+            <div class="price-row">
+                <span class="new-price">₹46,999</span>
+                <span class="old-price">₹58,749</span>
+            </div>
+        </div>
+    </a>
+
+        <!-- CARD 10-->
+    <a href="{% url 'tv_media_units_detail' slug='Giza' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">40% OFF</span>
+                <img src="{% static 'images/tv10.jpg' %}">
+            </div>
+            <h4>Giza Composite Marble Top TV Unit - Beige and Brown</h4>
+            <div class="price-row">
+                <span class="new-price">₹34,999</span>
+                <span class="old-price">₹58,332</span>
+            </div>
+        </div>
+    </a>
+
+
+        <!-- CARD 11-->
+        <a href="{% url 'tv_media_units_detail' slug='soho' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">47% OFF</span>
+                <img src="{% static 'images/tv11.jpg' %}">
+            </div>
+            <h4>Soho Medium TV Unit with 3 Multipurpose Cases - White</h4>
+            <div class="price-row">
+                <span class="new-price">₹15,294</span>
+                <span class="old-price">₹28,554</span>
+            </div>
+        </div>
+    </a>
+
+        <!-- CARD 12-->
+        <a href="{% url 'tv_media_units_detail' slug='mango' %}"  class="product-link">
+        <div class="product-card">
+            <div class="product-img">
+                <span class="discount">40% OFF</span>
+                <img src="{% static 'images/tv12.jpg' %}">
+            </div>
+            <h4>Home Centre Cameroon Mango Wood Top TV Unit - Brown</h4>
+            <div class="price-row">
+                <span class="new-price">₹39,999</span>
+                <span class="old-price">₹66,665</span>
+            </div>
+        </div>
+    </a>
+
+
+    </div>
+</div>
+
+<!-- FOOTER -->
+{% include "partials/footer.html" %}
+
+</body>
+</html>

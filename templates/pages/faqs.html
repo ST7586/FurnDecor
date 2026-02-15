@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Living Room | Furndecor</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/pages.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<div class="faq-container">
+  <h1 class="faq-title">FAQs</h1>
+
+  <h2 class="faq-section">Account</h2>
+
+  <!-- FAQ ITEM -->
+  <div class="faq-item">
+    <div class="faq-question">
+      <span>What is "My Account"?</span>
+      <span class="arrow">⌄</span>
+    </div>
+    <div class="faq-answer">
+      <p>
+        'My Account' allows you complete control over your transactions on HomeTown.in. On this page you can update your contact details, change your password, and view your wishlist. You can also check your orders and keep track on what’s due for delivery.
+      </p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">
+      <span>How do I update my information?</span>
+      <span class="arrow">⌄</span>
+    </div>
+    <div class="faq-answer">
+      <p>
+        It is simple. Just login with your registered email-id & password.
+      </p>
+    </div>
+  </div>
+
+ <div class="faq-item">
+    <div class="faq-question">
+      <span>Is it necessary to have an account to shop on HomeTown.in?</span>
+      <span class="arrow">⌄</span>
+    </div>
+    <div class="faq-answer">
+      <p>
+        Yes, you need to register to shop on HomeTown.in. By creating your own account, you can enjoy a personalized shopping experience, including recommendations, quicker checkout, and your wishlist. You will also be able to rate/review products.
+
+      </p>
+    </div>
+  </div>
+
+  <h2 class="faq-section">Order related queries</h2>
+
+  <div class="faq-item">
+    <div class="faq-question">
+      <span>How do I know that my Order has been confirmed?</span>
+      <span class="arrow">⌄</span>
+    </div>
+    <div class="faq-answer">
+      <p>
+        Once you have completed the payments process and an authorization has been received, you will be navigated to a Thank You page where you will see your Order Confirmation details. You will also receive an SMS and email confirmation.
+      </p>
+    </div>
+  </div>
+
+<div class="faq-item">
+    <div class="faq-question">
+      <span>Can I order a product that is "Out of Stock"?</span>
+      <span class="arrow">⌄</span>
+    </div>
+    <div class="faq-answer">
+      <p>
+        Unfortunately, products listed as 'Out of Stock' are not available for sale. Use the 'Notify Me' feature to be informed when it's back.
+      </p>
+    </div>
+  </div>
+
+<div class="faq-item">
+    <div class="faq-question">
+      <span>How do I check the current status of my Orders?</span>
+      <span class="arrow">⌄</span>
+    </div>
+    <div class="faq-answer">
+      <p>
+        Go to 'My Account' > 'My Orders' to view the status of all orders. Click on any Order Number for details.
+      </p>
+    </div>
+  </div>
+
+<div class="faq-item">
+    <div class="faq-question">
+      <span>When and how can I cancel an order?</span>
+      <span class="arrow">⌄</span>
+    </div>
+    <div class="faq-answer">
+      <p>
+        You can cancel within 24 hours of placing the order. Contact us at care@hometown.in or call 9156767586 (10 AM - 8 PM).
+      </p>
+    </div>
+  </div>
+
+  <h2 class="faq-section">Account</h2>
+
+  <div class="faq-item">
+    <div class="faq-question">
+      <span>How do I pay for a purchase?</span>
+      <span class="arrow">⌄</span>
+    </div>
+    <div class="faq-answer">
+      <p>
+        FurnDecor.in supports multiple payment methods including Net Banking, Credit/Debit Card, and EMI options.
+      </p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">
+      <span>How do I pay using a Credit or Debit Card?</span>
+      <span class="arrow">⌄</span>
+    </div>
+    <div class="faq-answer">
+      <p>
+        We accept Visa, MasterCard, Amex. You'll need card number, expiry, and CVV. Authentication is done via 3D Secure.
+      </p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-question">
+      <span>Is it safe to use my Credit / Debit card on HomeTown?</span>
+      <span class="arrow">⌄</span>
+    </div>
+    <div class="faq-answer">
+      <p>
+        Yes. FurnDecor uses 256-bit encryption and 3D Secure services for safe transactions.
+      </p>
+    </div>
+  </div>
+
+<div class="faq-item">
+    <div class="faq-question">
+      <span>What is a 3DSecure password?</span>
+      <span class="arrow">⌄</span>
+    </div>
+    <div class="faq-answer">
+      <p>
+        It's an added password protection for online transactions provided by Visa, MasterCard, and Amex.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+{% include "partials/footer.html" %}
+
+<script>
+  document.querySelectorAll(".faq-question").forEach(item => {
+    item.addEventListener("click", () => {
+      const answer = item.nextElementSibling;
+      const arrow = item.querySelector(".arrow");
+
+      answer.classList.toggle("open");
+      arrow.classList.toggle("rotate");
+    });
+  });
+</script>
+
+
+</body>
+</html>

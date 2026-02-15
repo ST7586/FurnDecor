@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blogs & Articles</title>
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+</head>
+<body>
+
+<div class="blogs-container">
+    <h1 class="page-title">Blogs & Articles</h1>
+
+    <div class="blogs-grid">
+        {% for blog in blogs %}
+        <div class="blog-card">
+            <a href="{% url 'blog_detail' blog.slug %}">
+                <img src="{{ blog.image.url }}" alt="{{ blog.title }}">
+            </a>
+
+            <div class="blog-content">
+                <h2>
+                    <a href="{% url 'blog_detail' blog.slug %}">
+                        {{ blog.title }}
+                    </a>
+                </h2>
+
+                <p class="author">{{ blog.author }}</p>
+
+                <p class="desc">
+                    {{ blog.short_description }}
+                </p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+</body>
+</html>

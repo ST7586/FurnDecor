@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout | FurnDecor</title>
+    <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+</head>
+<body>
+
+<div class="checkout-container">
+
+    <!-- LEFT SIDE -->
+    <div class="checkout-left">
+
+        <h2>Delivery Details</h2>
+
+        <form method="POST" action="{% url 'place_order' %}">
+            {% csrf_token %}
+
+            <input type="text" name="mobile" placeholder="Mobile Number" required>
+
+            <div class="row">
+                <input type="text" name="pincode" placeholder="Pincode" required>
+                <input type="text" name="city" placeholder="City" required>
+                <input type="text" name="state" placeholder="State" required>
+            </div>
+
+            <textarea name="address" placeholder="Full Address" required></textarea>
+
+            <h2>Payment Options</h2>
+
+            <div class="payment-options">
+                <label><input type="radio" name="payment_method" value="UPI" required> UPI</label>
+                <label><input type="radio" name="payment_method" value="CARD"> Debit/Credit Card</label>
+                <label><input type="radio" name="payment_method" value="NETBANKING"> Net Banking</label>
+                <label><input type="radio" name="payment_method" value="EMI"> EMI</label>
+            </div>
+
+            <button type="submit" class="pay-btn">Proceed to Payment</button>
+
+        </form>
+    </div>
+
+
+    <!-- RIGHT SIDE -->
+    <div class="checkout-right">
+
+        <h3>Order Summary</h3>
+
+        <div class="product-box">
+            <img src="{{ product.image }}" alt="">
+            <div>
+                <p class="product-name">{{ product.name }}</p>
+                <p class="product-price">₹ {{ product.price }}</p>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="price-summary">
+            <p>Subtotal <span>₹ {{ product.price }}</span></p>
+            <p>Shipping <span>Free</span></p>
+            <h3>Total <span>₹ {{ product.price }}</span></h3>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

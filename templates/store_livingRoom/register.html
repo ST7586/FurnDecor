@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Create Account</title>
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#fff;
+}
+
+.auth-box{
+    max-width:520px;
+    margin:100px auto;
+    text-align:center;
+}
+
+h1{
+    font-size:42px;
+    margin-bottom:40px;
+}
+
+label{
+    display:block;
+    text-align:left;
+    margin-bottom:8px;
+    font-size:15px;
+}
+
+input{
+    width:100%;
+    padding:18px;
+    border-radius:14px;
+    border:none;
+    background:#f3f3f3;
+    font-size:16px;
+    margin-bottom:28px;
+}
+
+.terms{
+    text-align:left;
+    font-size:19px;
+    font-family:Berlin Sans FB;
+    margin-bottom:30px;
+}
+
+#createBtn{
+    width:100%;
+    padding:18px;
+    border:none;
+    border-radius:14px;
+    font-size:18px;
+    color:white;
+    background:#efb4b4;   /* light red */
+    cursor:not-allowed;
+    transition:0.3s;
+}
+
+#createBtn.active{
+    background:#dd5c5c;   /* solid red */
+    cursor:pointer;
+}
+
+
+.signin-link{
+    margin-top:30px;
+    font-weight:bold;
+    text-decoration:underline;
+}
+</style>
+</head>
+
+<body>
+
+<div class="auth-box">
+    <h1>Create account</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>First name</label>
+        <input type="text" name="first_name" placeholder="First name" required>
+
+        <label>Last name</label>
+        <input type="text" name="last_name" placeholder="Last name" required>
+
+        <label>Email</label>
+        <input type="email" name="email" placeholder="Email" required>
+
+        <label>Phone Number</label>
+        <input type="text" name="phone" placeholder="Phone Number">
+
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Password" required>
+
+        <div class="terms">
+            <input type="checkbox" id="agreeCheck" required>
+             I agree to the <a href="{% url 'terms' %}" target="_blank">Terms & Conditions</a>and agree to be contacted by FurnDecor regarding my interest via phone call, SMS, Text, WhatsApp or RCS.
+        </div>
+
+        <button id="createBtn" disabled>Create</button>
+    </form>
+
+    <div class="signin-link">
+        <a href="{% url 'login' %}">Sign In</a>
+    </div>
+</div>
+
+<!--JS-->
+
+<script>
+const inputs = document.querySelectorAll("input[type=text], input[type=email], input[type=password]");
+const checkbox = document.getElementById("agreeCheck");
+const btn = document.getElementById("createBtn");
+
+function checkForm(){
+    let filled = true;
+
+    inputs.forEach(input=>{
+        if(input.value.trim() === ""){
+            filled = false;
+        }
+    });
+
+    if(filled && checkbox.checked){
+        btn.disabled = false;
+        btn.classList.add("active");
+    }else{
+        btn.disabled = true;
+        btn.classList.remove("active");
+    }
+}
+
+inputs.forEach(input => input.addEventListener("input", checkForm));
+checkbox.addEventListener("change", checkForm);
+</script>
+
+
+</body>
+</html>
