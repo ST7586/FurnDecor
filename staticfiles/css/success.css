@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.success-container {
+    text-align: center;
+}
+
+.success-card {
+    background: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    width: 400px;
+}
+
+.checkmark {
+    font-size: 60px;
+    color: #28a745;
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-bottom: 10px;
+}
+
+.home-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: #d9534f;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+.home-btn:hover {
+    background: #c9302c;
+}
